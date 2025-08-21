@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="AdminLTE 4 | Theme Customize">
+    <meta name="author" content="AdminC54">
+    <meta name="description" content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
+    <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard">
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <link rel="stylesheet" href="./public/css/overlayscrollbars.min.css" >
+    <!--end::TP -->
+    <!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <link rel="stylesheet" href="./public/css/bootstrap-icons.min.css" >
+    <!--end::Third Party Plugin(Bootstrap Icons)-->
+    <!--begin::Required Plugin(AdminLTE)-->
+    <title>Maestro Celdas Prefectura</title>
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="./public/css/adminlte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="./public/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="./public/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <link rel="stylesheet" href=".public/css/index.css" >
+    
+</head>
+<!-- hold-transition sidebar-mini layout-fixed -->
+<body class="sidebar-expand-lg bg-body-tertiary app-loaded sidebar-open">
+    <div class="app-wrapper">
+
+        <!-- Navbar -->
+        <nav class="app-header navbar navbar-expand bg-primary-subtle" data-bs-theme="dark">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav"><li class="nav-item"><a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i class="bi bi-list"></i> </a></li></ul>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="main-sidebar app-sidebar bg-primary-subtle sidebar-dark-primary elevation-4" data-bs-theme="dark" >
+            
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <span class="brand-text font-weight-light"><i class="nav-icon fas fa-table"></i> AdminLTE + DataTables</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="app-main">
+            <div class="app-content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="mb-0"> Maestro de Celdas Prefectura </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="app-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline mb-4">
+                                <div class="card-header card-info">
+                                    <h3 class="card-title">
+                                        Listado de Celdas
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-success mb-3" id="newRecord">Nuevo Registro</button>
+
+                                    <table id="example" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Destino</th>
+                                                <th>Número de Celda</th>
+                                                <th>Capacidad</th>
+                                                <th>Superficie</th>
+                                                <th>Femenino</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <!-- Modal Nuevo/Editar -->
+        <div class="modal fade" id="recordModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <form id="recordForm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitle">Nuevo Registro</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" class="form-control" id="celdaid" name="celdaid">
+                            <div class="mb-3">
+                                <label for="destino" class="form-label">Destino</label>
+                                <input type="text" class="form-control" id="destino" name="destino" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="celda" class="form-label">Numero de Celda</label>
+                                <input type="number" class="form-control" id="celda" name="celda" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capacidad" class="form-label">Capacidad</label>
+                                <input type="number" class="form-control" id="capacidad" name="capacidad" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="superficie" class="form-label">Superficie</label>
+                                <input type="text" class="form-control" id="superficie" name="superficie" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="femenino" class="form-label">Femenino</label>
+                                <input type="text" class="form-control" id="femenino" name="femenino" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Modal Eliminar -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Eliminar Registro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="confirmDelete" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script src="./public/js/overlayscrollbars.browser.es6.min.js" ></script>
+<script src="./public/js/popper.min.js" ></script>
+
+<!-- AdminLTE JS -->
+<script src="./public/js/adminlte.js"></script>
+
+
+<!-- DataTables JS -->
+<script src="./public/js/jquery-3.6.0.min.js"></script>
+<script src="./public/js/jquery.dataTables.min.js"></script>
+<script src="./public/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="./public/js/dataTables.buttons.min.js"></script>
+<script src="./public/js/buttons.bootstrap5.min.js"></script>
+<script src="./public/js/jszip.min.js"></script>
+<script src="./public/js/buttons.html5.min.js"></script>
+<script src="./public/js/buttons.print.min.js"></script>
+
+<script src="./public/js/bootstrap.min.js" ></script>
+
+<script>
+    const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]',
+    );
+    const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
+    );
+</script>
+
+<script>
+    const toastTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="toast"]',
+    );
+    toastTriggerList.forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const toastEle = document.getElementById(
+                btn.getAttribute("data-bs-target"),
+            );
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEle);
+            toastBootstrap.show();
+        });
+    });
+</script>
+
+
+<script>
+    const table = $('#example').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: 'backend_dt.php?action=listar',
+            columns: [
+                { data: 'ID_CELDA' },
+                { data: 'DESTINO' },
+                { data: 'NRO_CELDA' },
+                { data: 'CAPACIDAD' },
+                { data: 'SUPERFICIE' },
+                { data: 'FEMENINO' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+                        <button class="btn btn-primary btn-sm edit-btn" data-celdaid="${row.ID_CELDA}" data-destino="${row.DESTINO}" data-celda="${row.NRO_CELDA}" 
+                            data-capacidad="${row.CAPACIDAD}" data-superficie="${row.SUPERFICIE}" data-femenino="${row.FEMENINO}">Editar</button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-celdaid="${data.ID_CELDA}">Eliminar</button>
+                        `;
+                    }
+                }
+            ],
+            dom: 'Bfrtip',
+            buttons: ['excelHtml5', 'print']
+        });
+
+    // Evento para Nuevo Registro
+    $('#newRecord').on('click', function () {
+        $('#recordForm')[0].reset();
+        $('#modalTitle').text('Nuevo Registro');
+        $('#recordModal').modal('show');
+    });
+
+    // Delegación para Editar
+    $('#example tbody').on('click', '.edit-btn', function () {
+        const id_celda = $(this).data('celdaid');
+        const destino = $(this).data('destino');
+        const nro_celda = $(this).data('celda');
+        const capacidad = $(this).data('capacidad');
+        const superficie = $(this).data('superficie');
+        const femenino = $(this).data('femenino');
+        //console.log(id_celda);
+        $('#celdaid').val(id_celda);
+        $('#destino').val(destino);
+        $('#celda').val(nro_celda);
+        $('#capacidad').val(capacidad);
+        $('#superficie').val(superficie);
+        $('#femenino').val(femenino);
+        $('#modalTitle').text('Editar Registro');
+        $('#recordModal').modal('show');
+    });
+
+    $('#recordForm').on('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch('backend_dt.php?action=save', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                $('#recordModal').modal('hide');
+                table.ajax.reload();
+            } else {
+                alert('Error al guardar el registro.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // Eliminar registro
+    $('#example tbody').on('click', '.delete-btn', function () {
+        const id_celda = $(this).data('celdaid');
+        $('#confirmDelete').data('celdaid', id_celda);
+        $('#deleteModal').modal('show');
+    });
+
+    $('#confirmDelete').on('click', function () {
+        const id_celda = $(this).data('celdaid');
+
+        fetch('backend_dt.php?action=delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ celdaid: id_celda })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                $('#deleteModal').modal('hide');
+                table.ajax.reload();
+            } else {
+                alert('Error al eliminar el registro.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

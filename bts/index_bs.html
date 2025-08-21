@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTables con Bootstrap 5</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Listado de Registros</h1>
+        <button class="btn btn-success mb-3" id="newRecord">Nuevo Registro</button>
+        <table id="example" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Destino</th>
+                    <th>Número de Celda</th>
+                    <th>Capacidad</th>
+                    <th>Superficie</th>
+                    <th>Femenino</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <!-- Modal Nuevo/Editar -->
+    <div class="modal fade" id="recordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="recordForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Nuevo Registro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" id="celdaid" name="celdaid">
+                        <div class="mb-3">
+                            <label for="destino" class="form-label">Destino</label>
+                            <input type="text" class="form-control" id="destino" name="destino" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="celda" class="form-label">Numero de Celda</label>
+                            <input type="text" class="form-control" id="celda" name="celda" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="capacidad" class="form-label">Capacidad</label>
+                            <input type="text" class="form-control" id="capacidad" name="capacidad" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="superficie" class="form-label">Superficie</label>
+                            <input type="text" class="form-control" id="superficie" name="superficie" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="femenino" class="form-label">Femenino</label>
+                            <input type="text" class="form-control" id="femenino" name="femenino" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal Eliminar -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar Registro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este registro?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmDelete" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modales de Editar y Eliminar (Mantienen los mismos códigos anteriores) -->
+<!--
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+-->
+<script src="./public/js/jquery-3.6.0.min.js"></script>
+<script src="./public/js/jquery.dataTables.min.js"></script>
+<script src="./public/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="./public/js/dataTables.buttons.min.js"></script>
+<script src="./public/js/buttons.bootstrap5.min.js"></script>
+<script src="./public/js/jszip.min.js"></script>
+<script src="./public/js/buttons.html5.min.js"></script>
+<script src="./public/js/buttons.print.min.js"></script>
+
+<script src="./public/js/bootstrap.min.js" ></script>
+
+<script>
+    const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]',
+    );
+    const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
+    );
+</script>
+
+<script>
+    const toastTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="toast"]',
+    );
+    toastTriggerList.forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const toastEle = document.getElementById(
+                btn.getAttribute("data-bs-target"),
+            );
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastEle);
+            toastBootstrap.show();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Inicializar DataTable con opciones de exportación
+        const table = $('#example').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: 'backend_dt.php?action=listar',
+            columns: [
+                { data: 'ID_CELDA' },
+                { data: 'DESTINO' },
+                { data: 'NRO_CELDA' },
+                { data: 'CAPACIDAD' },
+                { data: 'SUPERFICIE' },
+                { data: 'FEMENINO' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+                        <button class="btn btn-primary btn-sm edit-btn" data-celdaid="${row.ID_CELDA}" data-destino="${row.DESTINO}" data-celda="${row.NRO_CELDA}" 
+                                    data-capacidad="${row.CAPACIDAD}" data-superficie="${row.SUPERFICIE}" data-femenino="${row.FEMENINO}">Editar</button>
+                        <button class="btn btn-danger btn-sm delete-btn" data-celdaid="${data.ID_CELDA}">Eliminar</button>
+                        `;
+                    }
+                }
+            ],
+            dom: 'Bfrtip',
+            buttons: ['excelHtml5', 'print']
+        });
+
+
+        $('#newRecord').on('click', function () {
+            $('#recordForm')[0].reset();
+            $('#modalTitle').text('Nuevo Registro');
+            $('#recordModal').modal('show');
+        });
+
+        $('#recordForm').on('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('backend_dt.php?action=save', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    $('#recordModal').modal('hide');
+                    table.ajax.reload();
+                } else {
+                    alert('Error al guardar el registro.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+            // Editar registro
+        $('#example tbody').on('click', '.edit-btn', function () {
+            const id_celda = $(this).data('celdaid');
+            const destino = $(this).data('destino');
+            const nro_celda = $(this).data('celda');
+            const capacidad = $(this).data('capacidad');
+            const superficie = $(this).data('superficie');
+            const femenino = $(this).data('femenino');
+            //console.log(id_celda);
+            $('#celdaid').val(id_celda);
+            $('#destino').val(destino);
+            $('#celda').val(nro_celda);
+            $('#capacidad').val(capacidad);
+            $('#superficie').val(superficie);
+            $('#femenino').val(femenino);
+            $('#modalTitle').text('Editar Registro');
+            $('#recordModal').modal('show');
+        });
+       
+        
+        $('#example tbody').on('click', '.delete-btn', function () {
+            const id_celda = $(this).data('celdaid');
+            $('#confirmDelete').data('celdaid', id_celda);
+            $('#deleteModal').modal('show');
+        });
+
+        $('#confirmDelete').on('click', function () {
+            const id_celda = $(this).data('celdaid');
+
+            fetch('backend_dt.php?action=delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ celdaid: id_celda })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    $('#deleteModal').modal('hide');
+                    table.ajax.reload();
+                } else {
+                    alert('Error al eliminar el registro.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    
+    });
+</script>
+</body>
+</html>

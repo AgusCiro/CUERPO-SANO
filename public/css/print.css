@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+@media print {
+	@page { 
+		size: A4 landscape;
+		margin: 0; 
+		padding: 0;
+	}
+	body {
+		margin: 0; 
+		padding: 0;
+	}
+	img {
+		page-break-after: always;
+	}
+}
