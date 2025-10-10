@@ -1,5 +1,6 @@
+
 <?php
-// app/models/Usuario.php
+
 include_once __DIR__ . '/conexion.php';
 
 class Usuario {
@@ -32,10 +33,10 @@ class Usuario {
                 return "No se encontró usuario con DNI: {$dni}";
             }
 
-            $hash = $usuario['codigo_barcode'] ?? '';
+            $hash = $usuario['password'] ?? '';
 
             if ($hash === '' || $hash === null) {
-                return "El usuario no tiene contraseña guardada (codigo_barcode vacío).";
+                return "El usuario no tiene contraseña guardada (password vacío).";
             }
 
             // comprobar longitud del hash (debug)
@@ -77,6 +78,43 @@ class Usuario {
         if (session_status() !== PHP_SESSION_ACTIVE) session_start();
         if (!isset($_SESSION['USUARIO']) || $_SESSION['USUARIO']['rol'] != $rolPermitido) {
             die("No tiene permisos para acceder a esta sección.");
+        }
+    }
+    
+    public function crearUsuario($nombre, $apellido, $email, $dni, $password, $rol) {
+    try {
+        $sql = "INSERT INTO miembros (nombre, apellido, email, dni, password, rol)
+                VALUES (:nombre, :apellido, :email, :dni, :password, :rol)";
+        $stmt = $this->conPDO->prepare($sql);
+
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':apellido', $apellido);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':dni', $dni);
+        $stmt->bindParam(':password', $passwordHash);
+        $stmt->bindParam(':rol', $rol);
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Error al crear usuario: " . $e->getMessage();
+        return false;
+        }
+    }
+
+
+    // 🔹 Cambiar contraseña
+    public function cambiarContrasena($dni, $nueva_password) {
+        try {
+            $sql = "UPDATE miembros SET password = :password WHERE DNI = :dni";
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->bindParam(':password', password_hash($nueva_password, PASSWORD_DEFAULT));
+            $stmt->bindParam(':dni', $dni);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error cambiarContrasena: " . $e->getMessage());
+            return false;
         }
     }
 }

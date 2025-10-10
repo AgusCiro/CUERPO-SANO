@@ -11,7 +11,7 @@
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card login-card p-4 shadow-lg">
-            <h3 class="text-center mb-3 text-primary">💪 Cuerpo Sano</h3>
+            <h3 class="text-center mb-3 text-primary">Cuerpo Sano</h3>
             <h5 class="text-center mb-4 text-secondary">Iniciar Sesión</h5>
 
             <!-- Mensaje de confirmación -->

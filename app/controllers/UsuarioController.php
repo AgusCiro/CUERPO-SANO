@@ -7,7 +7,7 @@ $usuario = new Usuario();
 if (isset($_POST['accion']) && $_POST['accion'] == 'nuevo_usuario') {
     $ok = $usuario->crearUsuario($_POST['nombre'], $_POST['apellido'], $_POST['email'], $_POST['dni'], $_POST['password'], $_POST['rol']);
     if ($ok) {
-        header("Location: ../../app/templates/usuarios/login.php?msg=Usuario+creado+correctamente");
+        header("Location: ../../app/templates/usuario/login.php?msg=Usuario+creado+correctamente");
     } else {
         echo "Error al crear usuario.";
     }
@@ -18,7 +18,7 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'nuevo_usuario') {
 if (isset($_POST['accion']) && $_POST['accion'] == 'cambiar_contrasena') {
     $ok = $usuario->cambiarContrasena($_POST['dni'], $_POST['nueva_password']);
     if ($ok) {
-        header("Location: ../../app/templates/usuarios/login.php?msg=Contraseña+cambiada+con+éxito");
+        header("Location: ../../app/templates/usuario/login.php ?msg=Contraseña+cambiada+con+éxito");
     } else {
         echo "Error al cambiar contraseña.";
     }
