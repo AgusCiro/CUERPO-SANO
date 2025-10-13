@@ -1,0 +1,87 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* CAMBIO DE COLORES DE AMARILLO A CELESTE */
+.btn-warning,
+.btn-warning:focus,
+.btn-warning:active {
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+.btn-warning:hover {
+    background-color: #138496 !important;
+    border-color: #138496 !important;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3) !important;
+}
+
+.btn-warning:active {
+    background-color: #0f6674 !important;
+    border-color: #0f6674 !important;
+    transform: translateY(0);
+}
+
+.text-warning {
+    color: #17a2b8 !important;
+}
+
+.text-warning:hover {
+    color: #138496 !important;
+}
+
+/* Asegurar que los botones grandes también sean celestes */
+.btn-lg.btn-warning {
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+    color: white !important;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.btn-lg.btn-warning:hover {
+    background-color: #138496 !important;
+    border-color: #138496 !important;
+    color: white !important;
+}
+
+/* HERO */
+.hero {
+    background: url('../images/inicio1.jpg') no-repeat center center/cover;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero h1 {
+    color: #fff;
+}
+
+.hero p {
+    color: #f8f9fa;
+}
+
+/* SECCIONES */
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* FOOTER */
+footer {
+    font-size: 15px;
+}
