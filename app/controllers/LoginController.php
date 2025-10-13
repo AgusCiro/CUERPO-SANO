@@ -17,8 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../templates/dashboard.php");
         exit;
     } else {
-        // Mensaje amigable (debug): lo mostramos en rojo
-        echo "<p style='color:red; font-weight:bold;'>" . htmlspecialchars($resultado) . "</p>";
+        // Redirigir con mensaje de error
+        $error_msg = urlencode($resultado);
+        header("Location: ../templates/usuario/login.php?error=" . $error_msg);
+        exit;
     }
 } else {
     http_response_code(405);

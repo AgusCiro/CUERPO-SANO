@@ -21,6 +21,13 @@
                 </div>
             <?php endif; ?>
 
+            <!-- Mensaje de error -->
+            <?php if (isset($_GET['error'])): ?>
+                <div class="alert alert-danger text-center">
+                    <?= htmlspecialchars($_GET['error']) ?>
+                </div>
+            <?php endif; ?>
+
             <form method="POST" action="../../controllers/LoginController.php">
                 <div class="mb-3">
                     <input type="text" name="dni" class="form-control" placeholder="DNI" required>
