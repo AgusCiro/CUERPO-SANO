@@ -65,8 +65,14 @@ class Usuario {
             // credenciales válidas -> resetear intentos y crear sesión
             $this->resetearIntentos($dni);
             if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+            // Debug: verificar qué campos están disponibles
+            error_log("Campos disponibles: " . print_r(array_keys($usuario), true));
+            error_log("DNI desde DB: " . ($usuario['DNI'] ?? 'NO EXISTE DNI'));
+            error_log("dni desde DB: " . ($usuario['dni'] ?? 'NO EXISTE dni'));
+            
             $_SESSION['USUARIO'] = [
                 'id' => $usuario['id'] ?? null,
+                'dni' => $usuario['DNI'] ?? $usuario['dni'] ?? '',
                 'nombre' => $usuario['nombre'] ?? '',
                 'apellido' => $usuario['apellido'] ?? '',
                 'email' => $usuario['email'] ?? '',

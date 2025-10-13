@@ -75,3 +75,10 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'cambiar_contrasena') {
     }
     exit;
 }
+
+// Cerrar sesión
+if (isset($_GET['accion']) && $_GET['accion'] == 'logout') {
+    $usuario->logout();
+    header("Location: ../templates/usuario/login.php?msg=Sesión+cerrada+correctamente");
+    exit;
+}
