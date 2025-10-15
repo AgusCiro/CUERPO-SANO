@@ -114,7 +114,7 @@ $errores = $errores ?? [];
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="dni" class="form-label required-field">DNI</label>
-                                    <input type="text" class="form-control" name="dni" id="dni"
+                                    <input type="number" class="form-control" name="dni" id="dni"
                                         value="<?php echo htmlspecialchars($_POST['dni'] ?? ''); ?>" required>
                                 </div>
                             </div>

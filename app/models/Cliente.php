@@ -69,9 +69,9 @@ class Cliente {
      */
     public function crearCliente($datos) {
         try {
-            $sql = "INSERT INTO clientes (codigo_barcode, nombre, apellido, dni,  direccion, telefono, email, fecha_nacimiento, tipo_descuento, estado) 
+            $sql = "INSERT INTO clientes (codigo_barcode, nombre, apellido, dni, direccion, telefono, email, fecha_nacimiento, tipo_descuento, estado) 
                     VALUES (:codigo_barcode, :nombre, :apellido, :dni, :direccion, :telefono, :email, :fecha_nacimiento, :tipo_descuento, :estado)";
-            
+            var_dump($datos);
             $stmt = $this->conPDO->prepare($sql);
             
             $stmt->bindParam(':codigo_barcode', $datos['codigo_barcode']);

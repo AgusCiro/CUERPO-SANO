@@ -46,6 +46,7 @@ switch ($accion) {
                 'codigo_barcode' => $_POST['codigo_barcode'] ?? '',
                 'nombre' => trim($_POST['nombre'] ?? ''),
                 'apellido' => trim($_POST['apellido'] ?? ''),
+                'dni' => trim($_POST['dni'] ?? ''),
                 'direccion' => trim($_POST['direccion'] ?? ''),
                 'telefono' => trim($_POST['telefono'] ?? ''),
                 'email' => trim($_POST['email'] ?? ''),
@@ -53,7 +54,7 @@ switch ($accion) {
                 'tipo_descuento' => $_POST['tipo_descuento'] ?? 'none',
                 'estado' => $_POST['estado'] ?? 'activo'
             ];
-
+            var_dump($datos);
             // Validaciones
             $errores = [];
             
@@ -64,7 +65,9 @@ switch ($accion) {
             if (empty($datos['apellido'])) {
                 $errores[] = "El apellido es obligatorio";
             }
-            
+            if (empty($datos['dni'])) {
+                $errores[] = "El DNI es obligatorio";
+            }
             if (!empty($datos['codigo_barcode']) && $cliente->codigoBarcodeExiste($datos['codigo_barcode'])) {
                 $errores[] = "El código de barras ya existe";
             }

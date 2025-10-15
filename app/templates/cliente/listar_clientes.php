@@ -268,16 +268,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                     <input type="hidden" name="accion" value="agregar">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="usuario_id" class="form-label">Usuario Asociado</label>
-                                    <select class="form-select" name="usuario_id" id="usuario_id">
-                                        <option value="">Seleccionar usuario...</option>
-                                    </select>
-                                    <div class="form-text">Opcional: Asociar con un usuario existente</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                                <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="codigo_barcode" class="form-label">Código de Barras</label>
                                     <input type="text" class="form-control" name="codigo_barcode" id="codigo_barcode">
@@ -300,12 +291,20 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="mb-3">
-                            <label for="direccion" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" name="direccion" id="direccion">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="dni" class="form-label">DNI *</label>
+                                    <input type="number" class="form-control" name="dni" id="dni" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                     <input type="text" class="form-control" name="direccion" id="direccion">
+                                </div>
+                           </div>
                         </div>
-                        
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
