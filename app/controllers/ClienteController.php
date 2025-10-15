@@ -42,7 +42,7 @@ switch ($accion) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validar datos
             $datos = [
-                'usuario_id' => $_POST['usuario_id'] ?? null,
+        
                 'codigo_barcode' => $_POST['codigo_barcode'] ?? '',
                 'nombre' => trim($_POST['nombre'] ?? ''),
                 'apellido' => trim($_POST['apellido'] ?? ''),
@@ -85,7 +85,7 @@ switch ($accion) {
         }
         
         // Obtener usuarios disponibles
-        $usuariosDisponibles = $cliente->obtenerUsuariosDisponibles();
+        
         include_once __DIR__ . '/../templates/cliente/agregar_cliente.php';
         break;
 
@@ -101,7 +101,7 @@ switch ($accion) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validar datos
             $datos = [
-                'usuario_id' => $_POST['usuario_id'] ?? null,
+    
                 'codigo_barcode' => $_POST['codigo_barcode'] ?? '',
                 'nombre' => trim($_POST['nombre'] ?? ''),
                 'apellido' => trim($_POST['apellido'] ?? ''),

@@ -69,15 +69,15 @@ class Cliente {
      */
     public function crearCliente($datos) {
         try {
-            $sql = "INSERT INTO clientes (usuario_id, codigo_barcode, nombre, apellido, direccion, telefono, email, fecha_nacimiento, tipo_descuento, estado) 
-                    VALUES (:usuario_id, :codigo_barcode, :nombre, :apellido, :direccion, :telefono, :email, :fecha_nacimiento, :tipo_descuento, :estado)";
+            $sql = "INSERT INTO clientes (codigo_barcode, nombre, apellido, dni,  direccion, telefono, email, fecha_nacimiento, tipo_descuento, estado) 
+                    VALUES (:codigo_barcode, :nombre, :apellido, :dni, :direccion, :telefono, :email, :fecha_nacimiento, :tipo_descuento, :estado)";
             
             $stmt = $this->conPDO->prepare($sql);
             
-            $stmt->bindParam(':usuario_id', $datos['usuario_id']);
             $stmt->bindParam(':codigo_barcode', $datos['codigo_barcode']);
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':apellido', $datos['apellido']);
+            $stmt->bindParam(':dni', $datos['dni']);
             $stmt->bindParam(':direccion', $datos['direccion']);
             $stmt->bindParam(':telefono', $datos['telefono']);
             $stmt->bindParam(':email', $datos['email']);
