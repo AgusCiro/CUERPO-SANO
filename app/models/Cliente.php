@@ -14,19 +14,17 @@ class Cliente {
     }
 
     /**
-     * Obtener todos los clientes con información del usuario relacionado
+     * Obtener todos los clientes
      */
     public function obtenerClientes($filtro = '') {
         try {
-            $sql = "SELECT c.*, m.dni, m.email as email_usuario, m.rol 
-                    FROM clientes c 
-                    LEFT JOIN miembros m ON c.usuario_id = m.id";
-            
+            $sql = "SELECT c.* 
+                    FROM clientes c";
             if (!empty($filtro)) {
                 $sql .= " WHERE c.nombre LIKE :filtro 
                          OR c.apellido LIKE :filtro 
                          OR c.numero_cliente LIKE :filtro
-                         OR m.dni LIKE :filtro";
+                         OR c.dni LIKE :filtro";
             }
             
             $sql .= " ORDER BY c.apellido, c.nombre";
@@ -51,9 +49,8 @@ class Cliente {
      */
     public function obtenerClientePorId($id) {
         try {
-            $sql = "SELECT c.*, m.dni, m.email as email_usuario, m.rol 
+            $sql = "SELECT c.* 
                     FROM clientes c 
-                    LEFT JOIN miembros m ON c.usuario_id = m.id 
                     WHERE c.id = :id";
             
             $stmt = $this->conPDO->prepare($sql);
@@ -151,27 +148,6 @@ class Cliente {
     }
 
     /**
-     * Obtener usuarios disponibles para asignar como clientes
-     */
-    public function obtenerUsuariosDisponibles() {
-        try {
-            $sql = "SELECT m.id, m.nombre, m.apellido, m.dni, m.email, m.rol 
-                    FROM miembros m 
-                    LEFT JOIN clientes c ON m.id = c.usuario_id 
-                    WHERE c.usuario_id IS NULL 
-                    ORDER BY m.apellido, m.nombre";
-            
-            $stmt = $this->conPDO->prepare($sql);
-            $stmt->execute();
-            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Error obtenerUsuariosDisponibles: " . $e->getMessage());
-            return [];
-        }
-    }
-
-    /**
      * Verificar si un código de barras ya existe
      */
     public function codigoBarcodeExiste($codigo, $excluirId = null) {
@@ -232,4 +208,5 @@ class Cliente {
         }
     }
 }
+
 ?>

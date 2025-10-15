@@ -21,7 +21,7 @@ switch ($accion) {
         // Obtener filtro de búsqueda
         $filtro = $_GET['filtro'] ?? '';
         $clientes = $cliente->obtenerClientes($filtro);
-        
+
         // Incluir la vista de listado
         include_once __DIR__ . '/../templates/cliente/listar_clientes.php';
         break;

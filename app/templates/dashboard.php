@@ -30,7 +30,7 @@ $usuario = $_SESSION['USUARIO'];
             <h2>CUERPO SANO</h2>
             <ul>
                 <li><a href="#">🏠 Inicio</a></li>
-                <li><a href="cliente/ClienteController.php?accion=listar">👥 Clientes</a></li>
+                <li><a href="../controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>
                 <li><a href="#">🧑‍🏫 Entrenadores</a></li>
                 <li><a href="#">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
