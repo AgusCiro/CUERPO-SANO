@@ -93,7 +93,7 @@ switch ($accion) {
         break;
 
     case 'editar':
-        $id = $_GET['id'] ?? 0;
+        $id = $_POST['id'] ?? $_GET['id'] ?? 0;
         $clienteData = $cliente->obtenerClientePorId($id);
         
         if (!$clienteData) {
@@ -104,7 +104,7 @@ switch ($accion) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Validar datos
             $datos = [
-    
+                'dni' => trim($_POST['dni'] ?? ''),
                 'codigo_barcode' => $_POST['codigo_barcode'] ?? '',
                 'nombre' => trim($_POST['nombre'] ?? ''),
                 'apellido' => trim($_POST['apellido'] ?? ''),
@@ -113,12 +113,13 @@ switch ($accion) {
                 'email' => trim($_POST['email'] ?? ''),
                 'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? null,
                 'tipo_descuento' => $_POST['tipo_descuento'] ?? 'none',
-                'estado' => $_POST['estado'] ?? 'activo'
+                'estado' => $_POST['estado'] ?? 'activo',
+                'usuario_id' => $_POST['usuario_id'] ?? null
             ];
 
-            // Validaciones
             $errores = [];
-            
+
+            // Validaciones básicas
             if (empty($datos['nombre'])) {
                 $errores[] = "El nombre es obligatorio";
             }
@@ -126,23 +127,34 @@ switch ($accion) {
             if (empty($datos['apellido'])) {
                 $errores[] = "El apellido es obligatorio";
             }
-            
-            if (!empty($datos['codigo_barcode']) && $cliente->codigoBarcodeExiste($datos['codigo_barcode'], $id)) {
-                $errores[] = "El código de barras ya existe";
-            }
-            
+
+            // Si no hay errores de validación, comprobar si hay cambios
             if (empty($errores)) {
-                if ($cliente->actualizarCliente($id, $datos)) {
-                    header("Location: ClienteController.php?accion=listar&success=Cliente+actualizado+correctamente");
-                    exit;
+                $isDataChanged = false;
+                if ($datos['nombre'] !== $clienteData['nombre']) $isDataChanged = true;
+                if ($datos['apellido'] !== $clienteData['apellido']) $isDataChanged = true;
+                if ($datos['direccion'] !== $clienteData['direccion']) $isDataChanged = true;
+                if ($datos['telefono'] !== $clienteData['telefono']) $isDataChanged = true;
+                if ($datos['email'] !== $clienteData['email']) $isDataChanged = true;
+                if ($datos['fecha_nacimiento'] !== $clienteData['fecha_nacimiento']) $isDataChanged = true;
+                if ($datos['tipo_descuento'] !== $clienteData['tipo_descuento']) $isDataChanged = true;
+                if ($datos['estado'] !== $clienteData['estado']) $isDataChanged = true;
+
+                if (!$isDataChanged) {
+                    $errores[] = "Debe actualizar al menos un dato.";
                 } else {
-                    $errores[] = "Error al actualizar el cliente";
+                    if ($cliente->actualizarCliente($id, $datos)) {
+                        header("Location: ClienteController.php?accion=listar&success=Cliente+actualizado+correctamente");
+                        exit;
+                    } else {
+                        $errores[] = "Error al actualizar el cliente.";
+                    }
                 }
             }
         }
         
         // Obtener usuarios disponibles
-        $usuariosDisponibles = $cliente->obtenerUsuariosDisponibles();
+        
         include_once __DIR__ . '/../templates/cliente/editar_cliente.php';
         break;
 

@@ -119,18 +119,25 @@ $errores = $errores ?? [];
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label required-field">Nombre</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre" 
                                            value="<?php echo htmlspecialchars($_POST['nombre'] ?? $clienteData['nombre']); ?>" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label required-field">Apellido</label>
                                     <input type="text" class="form-control" name="apellido" id="apellido" 
                                            value="<?php echo htmlspecialchars($_POST['apellido'] ?? $clienteData['apellido']); ?>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="dni" class="form-label required-field">DNI</label>
+                                    <input type="number" class="form-control" name="dni" id="dni"
+                                           value="<?php echo htmlspecialchars($_POST['dni'] ?? $clienteData['dni']); ?>" required>
                                 </div>
                             </div>
                         </div>
@@ -191,25 +198,9 @@ $errores = $errores ?? [];
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="usuario_id" class="form-label">Usuario Asociado</label>
-                                    <select class="form-select" name="usuario_id" id="usuario_id">
-                                        <option value="">Seleccionar usuario...</option>
-                                        <?php foreach ($usuariosDisponibles as $usuarioDisponible): ?>
-                                            <option value="<?php echo $usuarioDisponible['id']; ?>" 
-                                                    <?php echo ($_POST['usuario_id'] ?? $clienteData['usuario_id']) == $usuarioDisponible['id'] ? 'selected' : ''; ?>>
-                                                <?php echo htmlspecialchars($usuarioDisponible['nombre'] . ' ' . $usuarioDisponible['apellido'] . ' (DNI: ' . $usuarioDisponible['dni'] . ')'); ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="form-text">Opcional: Asociar con un usuario existente para permitir login</div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
                                     <label for="codigo_barcode" class="form-label">Código de Barras</label>
-                                    <input type="text" class="form-control" name="codigo_barcode" id="codigo_barcode" 
-                                           value="<?php echo htmlspecialchars($_POST['codigo_barcode'] ?? $clienteData['codigo_barcode']); ?>">
-                                    <div class="form-text">Código único para identificación</div>
+                                                                         <input type="text" class="form-control" name="codigo_barcode" id="codigo_barcode" 
+                                                                               value="<?php echo htmlspecialchars($_POST['codigo_barcode'] ?? $clienteData['codigo_barcode']); ?>" readonly>                                    <div class="form-text">Código único para identificación</div>
                                 </div>
                             </div>
                         </div>

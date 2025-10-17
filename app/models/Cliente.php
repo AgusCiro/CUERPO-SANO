@@ -98,8 +98,6 @@ class Cliente {
     public function actualizarCliente($id, $datos) {
         try {
             $sql = "UPDATE clientes SET 
-                    usuario_id = :usuario_id,
-                    codigo_barcode = :codigo_barcode,
                     nombre = :nombre,
                     apellido = :apellido,
                     direccion = :direccion,
@@ -113,8 +111,6 @@ class Cliente {
             $stmt = $this->conPDO->prepare($sql);
             
             $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':usuario_id', $datos['usuario_id']);
-            $stmt->bindParam(':codigo_barcode', $datos['codigo_barcode']);
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':apellido', $datos['apellido']);
             $stmt->bindParam(':direccion', $datos['direccion']);
