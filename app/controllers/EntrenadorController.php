@@ -40,6 +40,8 @@ switch ($accion) {
 
     case 'agregar':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $is_ajax = isset($_POST['is_ajax']) && $_POST['is_ajax'] == 1;
+
             // Validar datos
             $datos = [
                 'nombre' => trim($_POST['nombre'] ?? ''),
@@ -62,11 +64,22 @@ switch ($accion) {
             
             if (empty($errores)) {
                 if ($entrenador->crearEntrenador($datos)) {
+                    if ($is_ajax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => true]);
+                        exit;
+                    }
                     header("Location: EntrenadorController.php?accion=listar&success=Entrenador+creado+correctamente");
                     exit;
                 } else {
                     $errores[] = "Error al crear el entrenador";
                 }
+            }
+
+            if ($is_ajax) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'errors' => $errores]);
+                exit;
             }
         }
         
@@ -83,6 +96,8 @@ switch ($accion) {
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $is_ajax = isset($_POST['is_ajax']) && $_POST['is_ajax'] == 1;
+
             // Validar datos
             $datos = [
                 'nombre' => trim($_POST['nombre'] ?? ''),
@@ -105,11 +120,22 @@ switch ($accion) {
             
             if (empty($errores)) {
                 if ($entrenador->actualizarEntrenador($id, $datos)) {
+                    if ($is_ajax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => true]);
+                        exit;
+                    }
                     header("Location: EntrenadorController.php?accion=listar&success=Entrenador+actualizado+correctamente");
                     exit;
                 } else {
                     $errores[] = "Error al actualizar el entrenador";
                 }
+            }
+
+            if ($is_ajax) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'errors' => $errores]);
+                exit;
             }
         }
         

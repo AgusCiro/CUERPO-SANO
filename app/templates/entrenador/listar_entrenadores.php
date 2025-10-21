@@ -8,6 +8,9 @@ $usuario = $_SESSION['USUARIO'];
 $filtro = $_GET['filtro'] ?? '';
 $mensaje = $_GET['success'] ?? $_GET['error'] ?? '';
 $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'danger' : '');
+
+// El controlador debe pasar esta variable
+$tiposEntrenador = $tiposEntrenador ?? []; 
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +78,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                     <input type="text" class="form-control" name="filtro" 
-                                           placeholder="Buscar por DNI, apellido, nombre o email..." 
+                                           placeholder="Buscar por DNI, apellido, nombre, email o n° de entrenador..." 
                                            value="<?php echo htmlspecialchars($filtro); ?>">
                                 </div>
                             </div>
@@ -99,28 +102,40 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>N°</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>DNI</th>
                                             <th>Teléfono</th>
-                                            <th>Email</th>
+                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (empty($entrenadores)): ?>
                                             <tr>
-                                                <td colspan="6" class="text-center">No se encontraron entrenadores.</td>
+                                                <td colspan="7" class="text-center">No se encontraron entrenadores.</td>
                                             </tr>
                                         <?php else: ?>
                                             <?php foreach ($entrenadores as $entrenador): ?>
                                                 <tr>
+                                                    <td><?php echo htmlspecialchars($entrenador['numero_entrenador']); ?></td>
                                                     <td><?php echo htmlspecialchars($entrenador['nombre']); ?></td>
                                                     <td><?php echo htmlspecialchars($entrenador['apellido']); ?></td>
                                                     <td><?php echo htmlspecialchars($entrenador['dni']); ?></td>
                                                     <td><?php echo htmlspecialchars($entrenador['telefono']); ?></td>
-                                                    <td><?php echo htmlspecialchars($entrenador['email']); ?></td>
                                                     <td>
+                                                        <?php 
+                                                            $estado = $entrenador['estado'];
+                                                            $claseBadge = 'bg-secondary';
+                                                            if ($estado == 'activo') $claseBadge = 'bg-success';
+                                                            if ($estado == 'suspendido') $claseBadge = 'bg-warning text-dark';
+                                                            if ($estado == 'baja') $claseBadge = 'bg-danger';
+                                                        ?>
+                                                        <span class="badge <?php echo $claseBadge; ?>"><?php echo ucfirst($estado); ?></span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="EntrenadorController.php?accion=ver&id=<?php echo $entrenador['id']; ?>" class="btn btn-sm btn-outline-info"><i class="fas fa-eye"></i></a>
                                                         <a href="EntrenadorController.php?accion=editar&id=<?php echo $entrenador['id']; ?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
                                                         <button type="button" class="btn btn-sm btn-outline-danger" onclick="eliminarEntrenador(<?php echo $entrenador['id']; ?>, '<?php echo htmlspecialchars($entrenador['nombre'] . ' ' . $entrenador['apellido']); ?>')"><i class="fas fa-trash"></i></button>
                                                     </td>
@@ -139,46 +154,89 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
 
     <!-- Modal para agregar entrenador -->
     <div class="modal fade" id="agregarEntrenadorModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-user-plus"></i> Nuevo Entrenador</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" action="../controllers/EntrenadorController.php">
+                <form method="POST" action="EntrenadorController.php" id="formAgregarEntrenador">
+                    <div id="agregarEntrenadorErrors" class="alert alert-danger" style="display: none;"></div>
                     <input type="hidden" name="accion" value="agregar">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre *</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="apellido" class="form-label">Apellido *</label>
                                     <input type="text" class="form-control" name="apellido" id="apellido" required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label for="dni" class="form-label">DNI</label>
-                                    <input type="text" class="form-control" name="dni" id="dni">
+                                    <label for="dni" class="form-label">DNI *</label>
+                                    <input type="text" class="form-control" name="dni" id="dni" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" name="direccion" id="direccion">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono</label>
                                     <input type="text" class="form-control" name="telefono" id="telefono">
                                 </div>
                             </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" id="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="numero_entrenador" class="form-label">N° Entrenador</label>
+                                    <input type="number" class="form-control" name="numero_entrenador" id="numero_entrenador" placeholder="Se genera automáticamente si se deja vacío">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select class="form-select" name="estado" id="estado">
+                                        <option value="activo" selected>Activo</option>
+                                        <option value="suspendido">Suspendido</option>
+                                        <option value="baja">Baja</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email">
+                            <label for="tipos" class="form-label">Especialidades</label>
+                            <select class="form-select" name="tipos[]" id="tipos" multiple size="3">
+                                <?php foreach ($tiposEntrenador as $tipo): ?>
+                                    <option value="<?php echo $tipo['id']; ?>"><?php echo htmlspecialchars($tipo['nombre']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
