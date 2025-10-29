@@ -32,6 +32,7 @@ $usuario = $_SESSION['USUARIO'];
                 <li><a href="#">🏠 Inicio</a></li>
                 <li><a href="../controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>
                 <li><a href="../controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
+                <li><a href="../controllers/MembresiaController.php?accion=listar">🎟️ Membresías</a></li>
                 <li><a href="#">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
                 <li><a href="#">📘 Instructivo</a></li>

@@ -24,6 +24,15 @@
 
         </div>
       </li>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownMembresia" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MEMBRESÍAS</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMembresia">
+          <a id="alta_membresia" class="dropdown-item" href="#">Alta de membresía</a>
+          <a id="listar_membresias" class="dropdown-item" href="#">Listar membresías</a>
+          <a id="asignar_membresia" class="dropdown-item" href="#">Asignar membresía a cliente</a>
+          <a id="listar_tipos_membresia" class="dropdown-item" href="#">Tipos de Membresía</a>
+        </div>
+      </li>
       </ul>
       <ul class="navbar-nav ml-auto">
          <li  class="nav-item dropdown active">

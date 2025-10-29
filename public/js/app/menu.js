@@ -26,6 +26,22 @@ class ControladorI {
 		$('#listar_persona').on('click', function() {
 			persona.listarPersona();
 		});
+
+		$('#alta_membresia').on('click', function() {
+			window.location.href = 'app/controllers/MembresiaController.php?accion=agregar';
+		});
+
+		$('#listar_membresias').on('click', function() {
+			window.location.href = 'app/controllers/MembresiaController.php?accion=listar';
+		});
+
+		$('#asignar_membresia').on('click', function() {
+			window.location.href = 'app/controllers/MembresiaController.php?accion=asignar';
+		});
+
+		$('#listar_tipos_membresia').on('click', function() {
+			window.location.href = 'app/controllers/MembresiaController.php?accion=listar_tipos';
+		});
 		
 		$('#salir').on('click', function() {
 			modalConfirmar('¿Realmente desea salir del sistema?');
