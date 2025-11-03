@@ -105,7 +105,7 @@ switch ($accion) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $datos = [
                 'nombre' => $_POST['nombre'] ?? '',
-                'duracion' => $_POST['duracion'] ?? '',
+                'duracion_dias' => $_POST['duracion'] ?? '',
                 'precio' => $_POST['precio'] ?? '',
                 'descripcion' => $_POST['descripcion'] ?? ''
             ];
@@ -132,7 +132,7 @@ switch ($accion) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $datos = [
                 'nombre' => $_POST['nombre'] ?? '',
-                'duracion' => $_POST['duracion'] ?? '',
+                'duracion_dias' => $_POST['duracion'] ?? '',
                 'precio' => $_POST['precio'] ?? '',
                 'descripcion' => $_POST['descripcion'] ?? '',
                 'activo' => $_POST['activo'] ?? '1'

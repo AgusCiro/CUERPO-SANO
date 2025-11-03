@@ -23,10 +23,10 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
         <aside class="sidebar">
             <h2>CUERPO SANO</h2>
             <ul>
-                <li><a href="../dashboard.php">🏠 Inicio</a></li>
+                <li><a href="../templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="ClienteController.php?accion=listar">👥 Clientes</a></li>
-                <li><a href="#">🧑‍🏫 Entrenadores</a></li>
-                <li><a href="#" class="active">🎟️ Membresías</a></li>
+                <li><a href="EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
+                <li><a href="MembresiaController.php?accion=listar" class="active">🎟️ Membresías</a></li>
                 <li><a href="#">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
                 <li><a href="#">📘 Instructivo</a></li>
@@ -78,7 +78,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                 <?php foreach ($tipos as $tipo): ?>
                                     <tr>
                                         <td><?php echo htmlspecialchars($tipo['nombre']); ?></td>
-                                        <td><?php echo htmlspecialchars($tipo['duracion']); ?></td>
+                                        <td><?php echo htmlspecialchars($tipo['duracion_dias']); ?></td>
                                         <td>$<?php echo htmlspecialchars(number_format($tipo['precio'], 2)); ?></td>
                                         <td><?php echo htmlspecialchars($tipo['descripcion']); ?></td>
                                         <td>

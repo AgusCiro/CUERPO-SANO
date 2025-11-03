@@ -14,9 +14,23 @@ class Membresia {
     }
 
     /**
+     * Actualizar el estado de las membresías vencidas
+     */
+    public function actualizarEstadoMembresias() {
+        try {
+            $sql = "UPDATE membresias SET estado = 'vencida' WHERE fecha_fin < CURDATE() AND estado = 'vigente'";
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error al actualizar estados de membresías: " . $e->getMessage());
+        }
+    }
+
+    /**
      * Obtener todas las membresías
      */
     public function obtenerMembresias($filtro = '') {
+        $this->actualizarEstadoMembresias(); // Actualizar estados antes de obtener
         try {
             $sql = "SELECT m.*, c.nombre as cliente_nombre, c.apellido as cliente_apellido, mt.nombre as tipo_nombre
                     FROM membresias m

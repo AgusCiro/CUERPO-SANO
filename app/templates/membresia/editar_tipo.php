@@ -74,7 +74,7 @@ $errores = $errores ?? [];
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="duracion" class="form-label">Duración (días)</label>
-                                        <input type="number" class="form-control" name="duracion" id="duracion" value="<?php echo htmlspecialchars($tipoData['duracion']); ?>" required>
+                                        <input type="number" class="form-control" name="duracion" id="duracion" value="<?php echo htmlspecialchars($tipoData['duracion_dias']); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

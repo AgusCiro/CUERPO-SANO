@@ -23,7 +23,7 @@ class MembresiaTipo {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error obtenerMembresiaTipos: " . $e->getMessage());
+            error_log ("Error obtenerMembresiaTipos: " . $e->getMessage());
             return [];
         }
     }
@@ -49,13 +49,13 @@ class MembresiaTipo {
      */
     public function crearMembresiaTipo($datos) {
         try {
-            $sql = "INSERT INTO membresia_tipos (nombre, duracion, precio, descripcion, activo) 
-                    VALUES (:nombre, :duracion, :precio, :descripcion, 1)";
+            $sql = "INSERT INTO membresia_tipos (nombre, duracion_dias, precio, descripcion, activo) 
+                    VALUES (:nombre, :duracion_dias, :precio, :descripcion, 1)";
             
             $stmt = $this->conPDO->prepare($sql);
             
             $stmt->bindParam(':nombre', $datos['nombre']);
-            $stmt->bindParam(':duracion', $datos['duracion']);
+            $stmt->bindParam(':duracion_dias', $datos['duracion_dias']);
             $stmt->bindParam(':precio', $datos['precio']);
             $stmt->bindParam(':descripcion', $datos['descripcion']);
             
@@ -73,7 +73,7 @@ class MembresiaTipo {
         try {
             $sql = "UPDATE membresia_tipos SET 
                     nombre = :nombre,
-                    duracion = :duracion,
+                    duracion_dias = :duracion_dias,
                     precio = :precio,
                     descripcion = :descripcion,
                     activo = :activo
@@ -83,7 +83,7 @@ class MembresiaTipo {
             
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':nombre', $datos['nombre']);
-            $stmt->bindParam(':duracion', $datos['duracion']);
+            $stmt->bindParam(':duracion_dias', $datos['duracion_dias']);
             $stmt->bindParam(':precio', $datos['precio']);
             $stmt->bindParam(':descripcion', $datos['descripcion']);
             $stmt->bindParam(':activo', $datos['activo']);
