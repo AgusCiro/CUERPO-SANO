@@ -49,7 +49,7 @@ class Actividad {
      */
     public function crearActividad($datos) {
         try {
-            $sql = "INSERT INTO actividades (nombre, descripcion, duracion_minutos, intensidad, activo) VALUES (:nombre, :descripcion, :duracion_minutos, :intensidad, 1)";
+            $sql = "INSERT INTO actividades (nombre, descripcion, duracion_minutos, intensidad, creado_at) VALUES (:nombre, :descripcion, :duracion_minutos, :intensidad, NOW())";
             $stmt = $this->conPDO->prepare($sql);
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':descripcion', $datos['descripcion']);
