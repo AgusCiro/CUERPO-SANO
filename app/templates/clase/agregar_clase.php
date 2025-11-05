@@ -24,11 +24,11 @@ $entrenadores = $entrenadores ?? [];
         <aside class="sidebar">
             <h2>CUERPO SANO</h2>
             <ul>
-                <li><a href="../dashboard.php">🏠 Inicio</a></li>
-                <li><a href="../controllers/ClienteController.php">👥 Clientes</a></li>
-                <li><a href="../controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
-                <li><a href="../controllers/ActividadController.php?accion=listar">🤸 Actividades</a></li>
-                <li><a href="../controllers/ClaseController.php?accion=listar" class="active">📅 Clases</a></li>
+                <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ActividadController.php?accion=listar">🤸 Actividades</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ClaseController.php?accion=listar" class="active">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
                 <li><a href="#">📘 Instructivo</a></li>
             </ul>

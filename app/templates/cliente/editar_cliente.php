@@ -49,10 +49,11 @@ $errores = $errores ?? [];
         <aside class="sidebar">
             <h2>CUERPO SANO</h2>
             <ul>
-                <li><a href="../dashboard.php">🏠 Inicio</a></li>
+                <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="ClienteController.php?accion=listar" class="active">👥 Clientes</a></li>
-                <li><a href="#">🧑‍🏫 Entrenadores</a></li>
-                <li><a href="#">📅 Clases</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ActividadController.php?accion=listar">🤸 Actividades</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ClaseController.php?accion=listar">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
                 <li><a href="#">📘 Instructivo</a></li>
             </ul>

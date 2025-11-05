@@ -23,14 +23,16 @@ $errores = $errores ?? [];
         <aside class="sidebar">
             <h2>CUERPO SANO</h2>
             <ul>
-                <li><a href="../dashboard.php">🏠 Inicio</a></li>
-                <li><a href="../controllers/ClienteController.php">👥 Clientes</a></li>
-                <li><a href="../controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
-                <li><a href="../controllers/ActividadController.php?accion=listar">🤸 Actividades</a></li>
-                <li><a href="../controllers/ClaseController.php?accion=listar" class="active">📅 Clases</a></li>
+                <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/EntrenadorController.php?accion=listar">🧑‍🏫 Entrenadores</a></li>
+                <li><a href="../controllers/ActividadController.php?accion=listar" class="active">🤸 Actividades</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/MembresiaController.php?accion=listar">🎟️ Membresías</a></li>
+                <li><a href="/CUERPO-SANO/app/controllers/ClaseController.php?accion=listar">📅 Clases</a></li>
                 <li><a href="#">🕓 Asistencias</a></li>
                 <li><a href="#">📘 Instructivo</a></li>
             </ul>
+
             <div class="user-sidebar">
                  <div class="user-info-sidebar">
                     <span class="user-name-sidebar"><?php echo htmlspecialchars($usuario['nombre'] . " " . $usuario['apellido']); ?></span>
