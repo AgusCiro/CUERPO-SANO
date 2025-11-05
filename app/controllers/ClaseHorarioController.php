@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../models/ClaseHorario.php';
 include_once __DIR__ . '/../models/Clase.php';
+include_once __DIR__ . '/../models/Inscripcion.php';
 
 $horarioModel = new ClaseHorario();
 $claseModel = new Clase();
@@ -75,6 +76,10 @@ switch ($accion) {
             exit;
         }
 
+        // Se necesita el modelo de inscripciones para validar el cupo
+        $inscripcionModel = new Inscripcion();
+        $inscritos = $inscripcionModel->contarInscripcionesPorHorario($id);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $datos = [
                 'fecha_inicio' => $_POST['fecha_inicio'] ?? '',
@@ -85,12 +90,19 @@ switch ($accion) {
 
             if (empty($datos['fecha_inicio']) || empty($datos['fecha_fin'])) $errores[] = 'Las fechas de inicio y fin son obligatorias.';
             if ($datos['cupo'] <= 0) $errores[] = 'El cupo debe ser un número positivo.';
+            
+            // Validar que el nuevo cupo no sea menor a los ya inscritos
+            if ($datos['cupo'] < $inscritos) {
+                $errores[] = "El cupo no puede ser menor que la cantidad de clientes ya inscritos ({$inscritos}).";
+            }
+
             if ($horarioModel->verificarSuperposicion($clase_id, $datos['fecha_inicio'], $datos['fecha_fin'], $id)) {
                 $errores[] = 'El horario se superpone con otro ya existente para esta clase.';
             }
 
             if (empty($errores)) {
-                if ($horarioModel->actualizarHorario($id, $datos)) {
+                // Se pasa el número de inscritos para recalcular el cupo restante
+                if ($horarioModel->actualizarHorario($id, $datos, $inscritos)) {
                     header("Location: ClaseHorarioController.php?clase_id={$clase_id}&success=Horario+actualizado+correctamente");
                     exit;
                 } else {
@@ -110,12 +122,12 @@ switch ($accion) {
         }
         exit;
 
-    case 'restablecer_cupo':
+    case 'restablecer':
         $id = $_GET['id'] ?? 0;
-        if ($horarioModel->restablecerCupo($id)) {
-            header("Location: ClaseHorarioController.php?clase_id={$clase_id}&success=Cupo+del+horario+restablecido");
+        if ($horarioModel->restablecerHorario($id)) {
+            header("Location: ClaseHorarioController.php?clase_id={$clase_id}&success=Horario+restablecido+correctamente.+Las+inscripciones+han+sido+eliminadas+y+el+cupo+restaurado.");
         } else {
-            header("Location: ClaseHorarioController.php?clase_id={$clase_id}&error=Error+al+restablecer+el+cupo");
+            header("Location: ClaseHorarioController.php?clase_id={$clase_id}&error=Error+al+restablecer+el+horario");
         }
         exit;
 

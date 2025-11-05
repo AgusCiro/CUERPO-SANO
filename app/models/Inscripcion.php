@@ -141,6 +141,37 @@ class Inscripcion {
         
         return $stmt->fetchColumn() > 0;
     }
+
+    /**
+     * Elimina todas las inscripciones de un horario específico.
+     */
+    public function eliminarInscripcionesPorHorario($clase_horario_id) {
+        try {
+            $sql = "DELETE FROM inscripciones_clase WHERE clase_horario_id = :clase_horario_id";
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->bindParam(':clase_horario_id', $clase_horario_id, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error en eliminarInscripcionesPorHorario: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Cuenta el número de clientes inscritos en un horario específico.
+     */
+    public function contarInscripcionesPorHorario($clase_horario_id) {
+        try {
+            $sql = "SELECT COUNT(*) FROM inscripciones_clase WHERE clase_horario_id = :clase_horario_id";
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->bindParam(':clase_horario_id', $clase_horario_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return (int) $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error en contarInscripcionesPorHorario: " . $e->getMessage());
+            return 0;
+        }
+    }
 }
 
 ?>

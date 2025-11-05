@@ -136,8 +136,8 @@ function confirmarEliminar(id, clase_id) {
     }
 }
 function confirmarRestablecer(id, clase_id) {
-    if (confirm(`¿Está seguro que desea restablecer el cupo para este horario? El cupo restante volverá a ser igual al cupo total.`)) {
-        window.location.href = `ClaseHorarioController.php?accion=restablecer_cupo&clase_id=${clase_id}&id=${id}`;
+    if (confirm(`¿Está seguro que desea restablecer este horario?\n\nEsta acción eliminará todas las inscripciones y restaurará el cupo original.`)) {
+        window.location.href = `ClaseHorarioController.php?accion=restablecer&clase_id=${clase_id}&id=${id}`;
     }
 }
 </script>

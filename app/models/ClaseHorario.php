@@ -69,13 +69,16 @@ class ClaseHorario {
     /**
      * Actualizar un horario existente
      */
-    public function actualizarHorario($id, $datos) {
+    public function actualizarHorario($id, $datos, $inscritos) {
         try {
+            $cupo_restante = $datos['cupo'] - $inscritos;
+
             $sql = "UPDATE clase_horarios SET 
                     fecha_inicio = :fecha_inicio, 
                     fecha_fin = :fecha_fin, 
                     ubicacion = :ubicacion, 
-                    cupo = :cupo
+                    cupo = :cupo,
+                    cupo_restante = :cupo_restante
                     WHERE id = :id";
             $stmt = $this->conPDO->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -83,6 +86,7 @@ class ClaseHorario {
             $stmt->bindParam(':fecha_fin', $datos['fecha_fin']);
             $stmt->bindParam(':ubicacion', $datos['ubicacion']);
             $stmt->bindParam(':cupo', $datos['cupo'], PDO::PARAM_INT);
+            $stmt->bindParam(':cupo_restante', $cupo_restante, PDO::PARAM_INT);
             return $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error en actualizarHorario: " . $e->getMessage());
@@ -134,16 +138,28 @@ class ClaseHorario {
     }
 
     /**
-     * Restablece el cupo restante de un horario a su capacidad total.
+     * Restablece el cupo de un horario y elimina todas las inscripciones asociadas.
      */
-    public function restablecerCupo($id) {
+    public function restablecerHorario($horario_id) {
+        $this->conPDO->beginTransaction();
         try {
-            $sql = "UPDATE clase_horarios SET cupo_restante = cupo WHERE id = :id";
-            $stmt = $this->conPDO->prepare($sql);
-            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            return $stmt->execute();
+            // 1. Eliminar todas las inscripciones para este horario
+            $sqlDelete = "DELETE FROM inscripciones_clase WHERE clase_horario_id = :horario_id";
+            $stmtDelete = $this->conPDO->prepare($sqlDelete);
+            $stmtDelete->bindParam(':horario_id', $horario_id, PDO::PARAM_INT);
+            $stmtDelete->execute();
+
+            // 2. Restablecer el cupo restante del horario
+            $sqlUpdate = "UPDATE clase_horarios SET cupo_restante = cupo WHERE id = :horario_id";
+            $stmtUpdate = $this->conPDO->prepare($sqlUpdate);
+            $stmtUpdate->bindParam(':horario_id', $horario_id, PDO::PARAM_INT);
+            $stmtUpdate->execute();
+
+            $this->conPDO->commit();
+            return true;
         } catch (PDOException $e) {
-            error_log("Error en restablecerCupo: " . $e->getMessage());
+            $this->conPDO->rollBack();
+            error_log("Error en restablecerHorario: " . $e->getMessage());
             return false;
         }
     }
