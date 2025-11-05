@@ -161,5 +161,19 @@ switch ($accion) {
     default:
         header("Location: MembresiaController.php?accion=listar");
         exit;
+        
+    case 'get_tipo_membresia':
+        $id = $_GET['id'] ?? 0;
+        $tipo = $membresiaTipo->obtenerMembresiaTipoPorId($id);
+        header('Content-Type: application/json');
+        echo json_encode($tipo);
+        exit;
+
+    case 'get_cliente_info':
+        $id = $_GET['id'] ?? 0;
+        $cliente_info = $cliente->obtenerClientePorId($id);
+        header('Content-Type: application/json');
+        echo json_encode($cliente_info);
+        exit;
 }
 ?>

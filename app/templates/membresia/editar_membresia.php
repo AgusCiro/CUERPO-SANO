@@ -62,7 +62,7 @@ $errores = $errores ?? [];
 
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="MembresiaController.php">
+                        <form method="POST" action="MembresiaController.php" id="form-membresia">
                             <input type="hidden" name="accion" value="editar">
                             <input type="hidden" name="id" value="<?php echo $membresiaData['id']; ?>">
                             
@@ -73,15 +73,23 @@ $errores = $errores ?? [];
                                         <option value="<?php echo $cli['id']; ?>" <?php echo ($cli['id'] == $membresiaData['cliente_id']) ? 'selected' : ''; ?>><?php echo htmlspecialchars($cli['nombre'] . ' ' . $cli['apellido']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <div id="descuento-info" class="form-text mt-2" style="display: none;"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="tipo_id" class="form-label">Tipo de Membresía</label>
                                 <select class="form-select" name="tipo_id" id="tipo_id" required>
                                     <?php foreach ($tipos as $tipo): ?>
-                                        <option value="<?php echo $tipo['id']; ?>" <?php echo ($tipo['id'] == $membresiaData['tipo_id']) ? 'selected' : ''; ?>><?php echo htmlspecialchars($tipo['nombre']); ?></option>
+                                        <option value="<?php echo $tipo['id']; ?>" <?php echo ($tipo['id'] == $membresiaData['tipo_id']) ? 'selected' : ''; ?> data-precio="<?php echo $tipo['precio']; ?>" data-dias="<?php echo $tipo['duracion_dias']; ?>"><?php echo htmlspecialchars($tipo['nombre']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+
+                            <div id="info_tipo_membresia" style="display: none;" class="mb-3">
+                                <h5>Información de la Membresía</h5>
+                                <p><strong>Precio:</strong> <span id="precio_tipo"></span></p>
+                                <p><strong>Duración:</strong> <span id="duracion_tipo"></span> días</p>
+                                <p><strong>Descripción:</strong> <span id="descripcion_tipo"></span></p>
                             </div>
 
                             <div class="row">
@@ -94,7 +102,7 @@ $errores = $errores ?? [];
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="fecha_fin" class="form-label">Fecha de Fin</label>
-                                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo $membresiaData['fecha_fin']; ?>" required>
+                                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo $membresiaData['fecha_fin']; ?>" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -102,34 +110,167 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label for="precio_final" class="form-label">Precio a Pagar</label>
+                                        <input type="text" class="form-control" id="precio_final" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-success" id="btn-cobrar">Cobrar</button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label for="precio_pagado" class="form-label">Precio Pagado</label>
-                                        <input type="number" step="0.01" class="form-control" name="precio_pagado" id="precio_pagado" value="<?php echo $membresiaData['precio_pagado']; ?>" required>
+                                        <input type="number" step="0.01" class="form-control" name="precio_pagado" id="precio_pagado" value="<?php echo $membresiaData['precio_pagado']; ?>" readonly required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="estado" class="form-label">Estado</label>
-                                        <select class="form-select" name="estado" id="estado">
-                                            <option value="vigente" <?php echo ($membresiaData['estado'] == 'vigente') ? 'selected' : ''; ?>>Vigente</option>
-                                            <option value="vencida" <?php echo ($membresiaData['estado'] == 'vencida') ? 'selected' : ''; ?>>Vencida</option>
-                                            <option value="cancelada" <?php echo ($membresiaData['estado'] == 'cancelada') ? 'selected' : ''; ?>>Cancelada</option>
-                                            <option value="suspendida" <?php echo ($membresiaData['estado'] == 'suspendida') ? 'selected' : ''; ?>>Suspendida</option>
-                                        </select>
+                                        <label for="numero_comprobante" class="form-label">Número de Comprobante</label>
+                                        <input type="text" class="form-control" name="numero_comprobante" id="numero_comprobante" value="<?php echo $membresiaData['numero_comprobante']; ?>" readonly>
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="mb-3">
-                                <label for="numero_comprobante" class="form-label">Número de Comprobante</label>
-                                <input type="text" class="form-control" name="numero_comprobante" id="numero_comprobante" value="<?php echo $membresiaData['numero_comprobante']; ?>">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select class="form-select" name="estado" id="estado">
+                                    <option value="vigente" <?php echo ($membresiaData['estado'] == 'vigente') ? 'selected' : ''; ?>>Vigente</option>
+                                    <option value="vencida" <?php echo ($membresiaData['estado'] == 'vencida') ? 'selected' : ''; ?>>Vencida</option>
+                                    <option value="cancelada" <?php echo ($membresiaData['estado'] == 'cancelada') ? 'selected' : ''; ?>>Cancelada</option>
+                                    <option value="suspendida" <?php echo ($membresiaData['estado'] == 'suspendida') ? 'selected' : ''; ?>>Suspendida</option>
+                                </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                            <button type="submit" class="btn btn-primary" id="btn-guardar" disabled><i class="fas fa-save"></i> Guardar Cambios</button>
                             <a href="MembresiaController.php?accion=listar" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
                 </div>
             </section>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let precioOriginal = 0;
+            let descuento = 0;
+
+            function actualizarPrecioFinal() {
+                let precioFinal = precioOriginal;
+                if (descuento > 0) {
+                    precioFinal = precioOriginal * (1 - descuento);
+                }
+                $('#precio_final').val(precioFinal.toFixed(2));
+            }
+
+            function obtenerInfoCliente() {
+                const clienteId = $('#cliente_id').val();
+                if (clienteId) {
+                    $.ajax({
+                        url: 'MembresiaController.php?accion=get_cliente_info',
+                        type: 'GET',
+                        data: { id: clienteId },
+                        dataType: 'json',
+                        success: function(cliente) {
+                            descuento = 0;
+                            let infoText = '';
+                            if (cliente.es_estudiante == 1) {
+                                descuento = 0.15;
+                                infoText = 'Posee un 15% de descuento por ser estudiante.';
+                            } else if (cliente.es_mayor_60 == 1) {
+                                descuento = 0.10;
+                                infoText = 'Posee un 10% de descuento por ser mayor de 60 años.';
+                            }
+
+                            if (infoText) {
+                                $('#descuento-info').text(infoText).show();
+                            } else {
+                                $('#descuento-info').hide();
+                            }
+                            actualizarPrecioFinal();
+                        }
+                    });
+                } else {
+                    $('#descuento-info').hide();
+                    descuento = 0;
+                    actualizarPrecioFinal();
+                }
+            }
+
+            function obtenerInfoTipoMembresia() {
+                const tipoId = $('#tipo_id').val();
+                if (tipoId) {
+                    $.ajax({
+                        url: 'MembresiaController.php?accion=get_tipo_membresia',
+                        type: 'GET',
+                        data: { id: tipoId },
+                        dataType: 'json',
+                        success: function(tipo) {
+                            if(tipo) {
+                                precioOriginal = parseFloat(tipo.precio);
+                                $('#precio_tipo').text(tipo.precio);
+                                $('#duracion_tipo').text(tipo.duracion_dias);
+                                $('#descripcion_tipo').text(tipo.descripcion);
+                                $('#info_tipo_membresia').show();
+                                $('#fecha_inicio').val('');
+                                $('#fecha_fin').val('');
+                                actualizarPrecioFinal();
+                            } else {
+                                $('#info_tipo_membresia').hide();
+                                precioOriginal = 0;
+                                actualizarPrecioFinal();
+                            }
+                        }
+                    });
+                } else {
+                    $('#info_tipo_membresia').hide();
+                    precioOriginal = 0;
+                    actualizarPrecioFinal();
+                }
+            }
+
+            $('#cliente_id').change(function() {
+                obtenerInfoCliente();
+            });
+
+            $('#tipo_id').change(function() {
+                obtenerInfoTipoMembresia();
+            });
+
+            $('#fecha_inicio').change(function() {
+                const fechaInicio = $(this).val();
+                const tipoId = $('#tipo_id').val();
+                const dias = $('#tipo_id option:selected').data('dias');
+
+                if (fechaInicio && dias) {
+                    const fechaFin = new Date(fechaInicio);
+                    fechaFin.setDate(fechaFin.getDate() + parseInt(dias));
+                    $('#fecha_fin').val(fechaFin.toISOString().split('T')[0]);
+                }
+            });
+
+            $('#btn-cobrar').click(function() {
+                const precioFinal = $('#precio_final').val();
+                if (precioFinal > 0) {
+                    // Simulación de cobro
+                    const numeroComprobante = 'COMP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                    $('#precio_pagado').val(precioFinal);
+                    $('#numero_comprobante').val(numeroComprobante);
+                    $('#btn-guardar').prop('disabled', false);
+                    alert('Cobro simulado exitosamente. Comprobante: ' + numeroComprobante);
+                } else {
+                    alert('No hay un precio a cobrar.');
+                }
+            });
+
+            // Init
+            obtenerInfoCliente();
+            obtenerInfoTipoMembresia();
+        });
+    </script>
         </main>
     </div>
 
