@@ -20,7 +20,7 @@ class Inscripcion {
         try {
             $sql = "SELECT i.id, i.fecha_inscripcion, c.nombre, c.apellido, c.dni
                     FROM inscripciones_clase i
-                    JOIN clientes c ON i.miembro_id = c.id
+                    JOIN clientes c ON i.cliente_id = c.id
                     WHERE i.clase_horario_id = :clase_horario_id
                     ORDER BY c.apellido, c.nombre";
             $stmt = $this->conPDO->prepare($sql);
@@ -61,7 +61,7 @@ class Inscripcion {
             }
 
             // 4. Insertar la nueva inscripción
-            $sqlInsert = "INSERT INTO inscripciones_clase (clase_horario_id, miembro_id, fecha_inscripcion, estado) VALUES (:clase_horario_id, :cliente_id, NOW(), 'inscripto')";
+            $sqlInsert = "INSERT INTO inscripciones_clase (clase_horario_id, cliente_id, fecha_inscripcion, estado) VALUES (:clase_horario_id, :cliente_id, NOW(), 'inscripto')";
             $stmtInsert = $this->conPDO->prepare($sqlInsert);
             $stmtInsert->bindParam(':clase_horario_id', $clase_horario_id, PDO::PARAM_INT);
             $stmtInsert->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
@@ -130,7 +130,7 @@ class Inscripcion {
         $sql = "SELECT COUNT(*) 
                 FROM inscripciones_clase i
                 JOIN clase_horarios h ON i.clase_horario_id = h.id
-                WHERE i.miembro_id = :cliente_id
+                WHERE i.cliente_id = :cliente_id
                 AND (:fecha_inicio_nueva < h.fecha_fin AND :fecha_fin_nueva > h.fecha_inicio)";
         
         $stmt = $this->conPDO->prepare($sql);
