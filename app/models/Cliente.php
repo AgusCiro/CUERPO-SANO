@@ -18,8 +18,17 @@ class Cliente {
      */
     public function obtenerClientes($filtro = '') {
         try {
-            $sql = "SELECT c.* 
-                    FROM clientes c";
+            $sql = "SELECT c.*, m.fecha_inicio, m.fecha_fin, m.estado as membresia_estado
+                    FROM clientes c
+                    LEFT JOIN (
+                        SELECT *
+                        FROM membresias
+                        WHERE id IN (
+                            SELECT MAX(id)
+                            FROM membresias
+                            GROUP BY cliente_id
+                        )
+                    ) m ON c.id = m.cliente_id";
             if (!empty($filtro)) {
                 $sql .= " WHERE c.nombre LIKE :filtro 
                          OR c.apellido LIKE :filtro 

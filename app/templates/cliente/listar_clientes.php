@@ -232,8 +232,26 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                                 </span>
                                             </div>
                                         <?php endif; ?>
+
+                                        <hr>
+                                        <div class="membership-info">
+                                            <h6 class="text-muted">Membresía</h6>
+                                            <?php if (!empty($cliente['fecha_inicio'])): ?>
+                                                <?php 
+                                                    $fecha_fin = new DateTime($cliente['fecha_fin']);
+                                                    $hoy = new DateTime();
+                                                    $estado_membresia = ($fecha_fin < $hoy) ? 'vencida' : 'activa';
+                                                    $estado_clase = ($estado_membresia == 'activa') ? 'success' : 'danger';
+                                                ?>
+                                                <div><small><strong>Inicio:</strong> <?php echo htmlspecialchars(date('d/m/Y', strtotime($cliente['fecha_inicio']))); ?></small></div>
+                                                <div><small><strong>Fin:</strong> <?php echo htmlspecialchars(date('d/m/Y', strtotime($cliente['fecha_fin']))); ?></small></div>
+                                                <div><small><strong>Estado:</strong> <span class="badge bg-<?php echo $estado_clase; ?>"><?php echo ucfirst($estado_membresia); ?></span></small></div>
+                                            <?php else: ?>
+                                                <small class="text-muted">No posee membresía</small>
+                                            <?php endif; ?>
+                                        </div>
                                         
-                                        <div class="d-flex action-buttons">
+                                        <div class="d-flex action-buttons mt-3">
                                             <button type="button" class="btn btn-sm btn-outline-info" 
                                                     onclick="verCliente(<?php echo $cliente['id']; ?>)">
                                                 <i class="fas fa-eye"></i> Ver

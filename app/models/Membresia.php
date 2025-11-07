@@ -152,6 +152,30 @@ class Membresia {
             return false;
         }
     }
+
+    /**
+     * Obtener la última membresía de un cliente por su ID
+     */
+    public function obtenerMembresiaActivaPorClienteId($cliente_id) {
+        $this->actualizarEstadoMembresias();
+        try {
+            $sql = "SELECT m.*, mt.nombre as tipo_nombre
+                    FROM membresias m
+                    JOIN membresia_tipos mt ON m.tipo_id = mt.id
+                    WHERE m.cliente_id = :cliente_id
+                    ORDER BY m.fecha_fin DESC
+                    LIMIT 1";
+            
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->bindParam(':cliente_id', $cliente_id);
+            $stmt->execute();
+            
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error obtenerMembresiaActivaPorClienteId: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 
 ?>

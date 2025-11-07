@@ -1,7 +1,10 @@
 <?php
 include_once __DIR__ . '/../models/Cliente.php';
+include_once __DIR__ . '/../models/Membresia.php';
 
 $cliente = new Cliente();
+$membresiaModel = new Membresia();
+
 
 // Verificar que el usuario esté logueado
 if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -21,6 +24,12 @@ switch ($accion) {
         // Obtener filtro de búsqueda
         $filtro = $_GET['filtro'] ?? '';
         $clientes = $cliente->obtenerClientes($filtro);
+
+        // Para cada cliente, obtener su última membresía
+        foreach ($clientes as &$c) {
+            $c['membresia'] = $membresiaModel->obtenerMembresiaActivaPorClienteId($c['id']);
+        }
+        unset($c); // Romper la referencia
 
         // Incluir la vista de listado
         include_once __DIR__ . '/../templates/cliente/listar_clientes.php';
