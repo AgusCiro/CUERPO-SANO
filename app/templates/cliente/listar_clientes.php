@@ -21,12 +21,15 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
     <link href="../../public/css/dashboard.css" rel="stylesheet">
     <style>
         .search-container {
-            background: #f8f9fa;
+            background: #212529;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .client-card {
+            background-color: #fff; /* White background for client cards */
+            color: #212529; /* Dark text for readability */
             transition: transform 0.2s;
             border: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -35,17 +38,31 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
+        .client-card .card-title {
+            color: #000 !important; /* Black color for the name */
+            font-weight: 700; /* Bolder font for emphasis */
+        }
+        .client-card .text-muted, .client-card small {
+            color: #212529 !important; /* Ensure all text inside is dark */
+        }
+        .client-card .membership-info h6 {
+             color: #6c757d !important; /* A slightly lighter grey for subheadings */
+        }
         .status-badge {
             font-size: 0.8em;
         }
         .discount-badge {
             font-size: 0.75em;
+            background-color: transparent !important;
+            border: 1px solid #17a2b8;
+            color: #000 !important;
+            font-weight: bold;
         }
         .action-buttons {
             gap: 5px;
         }
         .stats-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #17a2b8; /* Standard light blue accent color */
             color: white;
             border-radius: 15px;
         }
@@ -89,7 +106,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                 <div class="header-content">
                     <h1><i class="fas fa-users"></i> Gestión de Clientes</h1>
                     <div class="header-actions">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">
                             <i class="fas fa-plus"></i> Nuevo Cliente
                         </button>
                     </div>
@@ -159,10 +176,10 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary me-2">
+                                <button type="submit" class="btn btn-info me-2">
                                     <i class="fas fa-search"></i> Buscar
                                 </button>
-                                <a href="ClienteController.php?accion=listar" class="btn btn-outline-secondary">
+                                <a href="ClienteController.php?accion=listar" class="btn btn-info">
                                     <i class="fas fa-times"></i> Limpiar
                                 </a>
                             </div>
@@ -194,7 +211,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                             <h5 class="card-title mb-0">
                                                 <?php echo htmlspecialchars($cliente['nombre'] . ' ' . $cliente['apellido']); ?>
                                             </h5>
-                                            <span class="badge bg-<?php echo $cliente['estado'] === 'activo' ? 'success' : ($cliente['estado'] === 'suspendido' ? 'warning' : 'danger'); ?> status-badge">
+                                            <span class="badge bg-<?php echo $cliente['estado'] === 'activo' ? 'success' : ($cliente['estado'] === 'suspendido' ? 'warning' : 'danger'); ?> <?php echo ($cliente['estado'] === 'suspendido' ? 'text-dark' : ''); ?> status-badge">
                                                 <?php echo ucfirst($cliente['estado']); ?>
                                             </span>
                                         </div>
@@ -369,7 +386,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-info">
                             <i class="fas fa-save"></i> Guardar Cliente
                         </button>
                     </div>
