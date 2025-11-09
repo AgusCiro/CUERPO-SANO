@@ -84,10 +84,10 @@ $tiposEntrenador = $tiposEntrenador ?? [];
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary me-2">
+                                <button type="submit" class="btn btn-info me-2">
                                     <i class="fas fa-search"></i> Buscar
                                 </button>
-                                <a href="EntrenadorController.php?accion=listar" class="btn btn-outline-secondary">
+                                <a href="EntrenadorController.php?accion=listar" class="btn btn-info">
                                     <i class="fas fa-times"></i> Limpiar
                                 </a>
                             </div>
