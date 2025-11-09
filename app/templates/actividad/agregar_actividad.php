@@ -16,6 +16,18 @@ $errores = $errores ?? [];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../../public/css/dashboard.css" rel="stylesheet">
+    <style>
+        .form-container {
+            background: #f8f9fa;
+            color: #212529;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-container .form-label {
+            color: #212529;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">
@@ -56,56 +68,54 @@ $errores = $errores ?? [];
             </header>
 
             <section class="content">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Completa los datos de la actividad</h5>
+                <div class="form-container">
+                    <h5 class="card-title mb-4">Completa los datos de la actividad</h5>
+                    
+                    <?php if (!empty($errores)): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php foreach ($errores as $error): ?>
+                                    <li><?php echo htmlspecialchars($error); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="ActividadController.php" method="POST">
+                        <input type="hidden" name="accion" value="agregar">
                         
-                        <?php if (!empty($errores)): ?>
-                            <div class="alert alert-danger">
-                                <ul>
-                                    <?php foreach ($errores as $error): ?>
-                                        <li><?php echo htmlspecialchars($error); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre *</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
 
-                        <form action="ActividadController.php" method="POST">
-                            <input type="hidden" name="accion" value="agregar">
-                            
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre *</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
-                            </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                        </div>
 
-                            <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripción</label>
-                                <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="duracion_minutos" class="form-label">Duración (minutos) *</label>
-                                        <input type="number" class="form-control" id="duracion_minutos" name="duracion_minutos" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="intensidad" class="form-label">Intensidad</label>
-                                        <select class="form-select" id="intensidad" name="intensidad">
-                                            <option value="Baja">Baja</option>
-                                            <option value="Media">Media</option>
-                                            <option value="Alta">Alta</option>
-                                        </select>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="duracion_minutos" class="form-label">Duración (minutos) *</label>
+                                    <input type="number" class="form-control" id="duracion_minutos" name="duracion_minutos" required>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="intensidad" class="form-label">Intensidad</label>
+                                    <select class="form-select" id="intensidad" name="intensidad">
+                                        <option value="Baja">Baja</option>
+                                        <option value="Media">Media</option>
+                                        <option value="Alta">Alta</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Actividad</button>
-                            <a href="ActividadController.php?accion=listar" class="btn btn-secondary">Cancelar</a>
-                        </form>
-                    </div>
+                        <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Guardar Actividad</button>
+                        <a href="ActividadController.php?accion=listar" class="btn btn-secondary">Cancelar</a>
+                    </form>
                 </div>
             </section>
         </main>

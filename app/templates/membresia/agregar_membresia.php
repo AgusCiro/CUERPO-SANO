@@ -60,8 +60,8 @@ $errores = $errores ?? [];
                     </div>
                 <?php endif; ?>
 
-                <div class="card">
-                    <div class="card-body">
+                <div class="card bg-white p-4">
+                    <div class="card-body text-dark">
                         <form method="POST" action="MembresiaController.php">
                             <input type="hidden" name="accion" value="agregar">
                             
@@ -117,7 +117,7 @@ $errores = $errores ?? [];
                             </div>
 
                             <div class="mb-3 text-end">
-                                <button type="button" class="btn btn-success" id="btnCobrar"><i class="fas fa-dollar-sign"></i> Cobrar</button>
+                                <button type="button" class="btn btn-info" id="btnCobrar"><i class="fas fa-dollar-sign"></i> Cobrar</button>
                             </div>
 
                             <div class="row">
@@ -140,7 +140,7 @@ $errores = $errores ?? [];
                                  <input type="text" class="form-control" name="estado" id="estado" value="vigente" readonly>
                             </div>
 
-                            <button type="submit" class="btn btn-primary" id="btnGuardar" disabled><i class="fas fa-save"></i> Guardar Membresía</button>
+                            <button type="submit" class="btn btn-info" id="btnGuardar" disabled><i class="fas fa-save"></i> Guardar Membresía</button>
                             <a href="MembresiaController.php?accion=listar" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>

@@ -49,7 +49,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                 <div class="header-content">
                     <h1><i class="fas fa-ticket-alt"></i> Gestión de Membresías</h1>
                     <div class="header-actions">
-                        <a href="MembresiaController.php?accion=agregar" class="btn btn-primary">
+                        <a href="MembresiaController.php?accion=agregar" class="btn btn-info">
                             <i class="fas fa-plus"></i> Nueva Membresía
                         </a>
                         <a href="MembresiaController.php?accion=listar_tipos" class="btn btn-info">

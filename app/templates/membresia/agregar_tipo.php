@@ -49,7 +49,7 @@ $errores = $errores ?? [];
                 </div>
             </header>
 
-            <section class="content">
+            <section class="content card text-dark">
                 <?php if (!empty($errores)): ?>
                     <div class="alert alert-danger">
                         <ul>
@@ -60,7 +60,7 @@ $errores = $errores ?? [];
                     </div>
                 <?php endif; ?>
 
-                <div class="card">
+                <div class="card" style="background-color: #fff; color: #000;">
                     <div class="card-body">
                         <form method="POST" action="MembresiaController.php">
                             <input type="hidden" name="accion" value="agregar_tipo">
