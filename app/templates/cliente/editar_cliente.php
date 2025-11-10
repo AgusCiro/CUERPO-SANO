@@ -25,8 +25,6 @@ $errores = $errores ?? [];
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .section-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
@@ -36,7 +34,6 @@ $errores = $errores ?? [];
             color: red;
         }
         .client-info {
-            background: #e3f2fd;
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1.5rem;
@@ -86,7 +83,7 @@ $errores = $errores ?? [];
 
             <section class="content">
                 <!-- Información del cliente -->
-                <div class="client-info">
+                <div class="client-info bg-info text-white">
                     <h5><i class="fas fa-user"></i> Editando: <?php echo htmlspecialchars($clienteData['nombre'] . ' ' . $clienteData['apellido']); ?></h5>
                     <p class="mb-0">
                         <strong>Número de Cliente:</strong> <?php echo htmlspecialchars($clienteData['numero_cliente']); ?> | 
@@ -115,7 +112,7 @@ $errores = $errores ?? [];
                         <input type="hidden" name="id" value="<?php echo $clienteData['id']; ?>">
                         
                         <!-- Información Personal -->
-                        <div class="section-header">
+                        <div class="section-header bg-info text-white">
                             <h4 class="mb-0"><i class="fas fa-id-card"></i> Información Personal</h4>
                         </div>
                         
@@ -164,7 +161,7 @@ $errores = $errores ?? [];
                         </div>
 
                         <!-- Información de Contacto -->
-                        <div class="section-header">
+                        <div class="section-header bg-info text-white">
                             <h4 class="mb-0"><i class="fas fa-address-book"></i> Información de Contacto</h4>
                         </div>
                         
@@ -192,7 +189,7 @@ $errores = $errores ?? [];
                         </div>
 
                         <!-- Información del Sistema -->
-                        <div class="section-header">
+                        <div class="section-header bg-info text-white">
                             <h4 class="mb-0"><i class="fas fa-cog"></i> Información del Sistema</h4>
                         </div>
                         
@@ -225,7 +222,7 @@ $errores = $errores ?? [];
                                     <i class="fas fa-times"></i> Cancelar
                                 </a>
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-info">
                                 <i class="fas fa-save"></i> Actualizar Cliente
                             </button>
                         </div>

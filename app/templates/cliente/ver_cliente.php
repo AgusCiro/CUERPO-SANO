@@ -18,7 +18,6 @@ $usuario = $_SESSION['USUARIO'];
     <link href="../../public/css/dashboard.css" rel="stylesheet">
     <style>
         .client-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 2rem;
             border-radius: 15px;
@@ -83,7 +82,7 @@ $usuario = $_SESSION['USUARIO'];
                         <a href="ClienteController.php?accion=listar" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left"></i> Volver
                         </a>
-                        <a href="ClienteController.php?accion=editar&id=<?php echo $clienteData['id']; ?>" class="btn btn-warning">
+                        <a href="ClienteController.php?accion=editar&id=<?php echo $clienteData['id']; ?>" class="btn btn-info">
                             <i class="fas fa-edit"></i> Editar
                         </a>
                     </div>
@@ -92,7 +91,7 @@ $usuario = $_SESSION['USUARIO'];
 
             <section class="content">
                 <!-- Header del cliente -->
-                <div class="client-header">
+                <div class="client-header bg-info">
                     <div class="row align-items-center">
                         <div class="col-md-8">
                             <h2 class="mb-2">
@@ -104,7 +103,7 @@ $usuario = $_SESSION['USUARIO'];
                                     <i class="fas fa-circle"></i> <?php echo ucfirst($clienteData['estado']); ?>
                                 </span>
                                 <?php if ($clienteData['tipo_descuento'] !== 'none'): ?>
-                                    <span class="badge bg-info discount-badge">
+                                    <span class="badge bg-info text-dark discount-badge">
                                         <i class="fas fa-percent"></i> Descuento: <?php echo ucfirst($clienteData['tipo_descuento']); ?>
                                     </span>
                                 <?php endif; ?>
@@ -121,7 +120,7 @@ $usuario = $_SESSION['USUARIO'];
                     <!-- Información Personal -->
                     <div class="col-md-6 mb-4">
                         <div class="card info-card h-100">
-                            <div class="card-header bg-primary text-white">
+                            <div class="card-header bg-info text-white">
                                 <h5 class="mb-0"><i class="fas fa-id-card"></i> Información Personal</h5>
                             </div>
                             <div class="card-body">
@@ -158,7 +157,7 @@ $usuario = $_SESSION['USUARIO'];
                     <!-- Información de Contacto -->
                     <div class="col-md-6 mb-4">
                         <div class="card info-card h-100">
-                            <div class="card-header bg-success text-white">
+                            <div class="card-header bg-info text-white">
                                 <h5 class="mb-0"><i class="fas fa-address-book"></i> Información de Contacto</h5>
                             </div>
                             <div class="card-body">
@@ -213,7 +212,7 @@ $usuario = $_SESSION['USUARIO'];
                             <div class="card-body">
                                 <div class="info-item d-flex">
                                     <span class="info-label">Tipo Descuento:</span>
-                                    <span class="badge bg-<?php echo $clienteData['tipo_descuento'] === 'none' ? 'secondary' : 'info'; ?>">
+                                    <span class="badge <?php echo $clienteData['tipo_descuento'] === 'none' ? 'bg-secondary' : 'bg-info text-dark'; ?>">
                                         <?php echo $clienteData['tipo_descuento'] === 'none' ? 'Sin descuento' : ucfirst($clienteData['tipo_descuento']); ?>
                                     </span>
                                 </div>
@@ -233,7 +232,7 @@ $usuario = $_SESSION['USUARIO'];
                                 <?php else: ?>
                                     <div class="info-item d-flex">
                                         <span class="info-label">Usuario Asociado:</span>
-                                        <span class="badge bg-warning">
+                                        <span class="badge bg-warning text-dark">
                                             <i class="fas fa-times"></i> No
                                         </span>
                                     </div>
@@ -245,7 +244,7 @@ $usuario = $_SESSION['USUARIO'];
                     <!-- Información del Sistema -->
                     <div class="col-md-6 mb-4">
                         <div class="card info-card h-100">
-                            <div class="card-header bg-secondary text-white">
+                            <div class="card-header bg-info text-white">
                                 <h5 class="mb-0"><i class="fas fa-cog"></i> Información del Sistema</h5>
                             </div>
                             <div class="card-body">
@@ -273,7 +272,7 @@ $usuario = $_SESSION['USUARIO'];
                             <div class="card-body text-center">
                                 <h5 class="card-title">Acciones Disponibles</h5>
                                 <div class="btn-group" role="group">
-                                    <a href="ClienteController.php?accion=editar&id=<?php echo $clienteData['id']; ?>" class="btn btn-warning">
+                                    <a href="ClienteController.php?accion=editar&id=<?php echo $clienteData['id']; ?>" class="btn btn-info">
                                         <i class="fas fa-edit"></i> Editar Cliente
                                     </a>
                                     <button type="button" class="btn btn-danger" onclick="eliminarCliente(<?php echo $clienteData['id']; ?>, '<?php echo htmlspecialchars($clienteData['nombre'] . ' ' . $clienteData['apellido']); ?>')">
