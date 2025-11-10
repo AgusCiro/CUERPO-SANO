@@ -97,9 +97,50 @@ $errores = $_GET['errores'] ?? [];
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" value="<?php echo htmlspecialchars($entrenadorData['email']); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" class="form-control" name="direccion" id="direccion" value="<?php echo htmlspecialchars($entrenadorData['direccion'] ?? ''); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="<?php echo htmlspecialchars($entrenadorData['fecha_nacimiento'] ?? ''); ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select class="form-control" name="estado" id="estado">
+                                            <option value="1" <?php echo ($entrenadorData['estado'] ?? 1) == 1 ? 'selected' : ''; ?>>Activo</option>
+                                            <option value="0" <?php echo ($entrenadorData['estado'] ?? 1) == 0 ? 'selected' : ''; ?>>Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" value="<?php echo htmlspecialchars($entrenadorData['email']); ?>">
+                                <label for="tipos" class="form-label">Especialidades</label>
+                                <select multiple class="form-control" id="tipos" name="tipos[]" style="min-height: 150px;">
+                                    <?php 
+                                        $tiposSeleccionados = array_column($entrenadorData['tipos'] ?? [], 'id');
+                                        if (!empty($tiposEntrenador)) {
+                                            foreach ($tiposEntrenador as $tipo) {
+                                                $selected = in_array($tipo['id'], $tiposSeleccionados) ? 'selected' : '';
+                                                echo "<option value=\"{$tipo['id']}\" $selected>" . htmlspecialchars($tipo['nombre']) . "</option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
                         </form>

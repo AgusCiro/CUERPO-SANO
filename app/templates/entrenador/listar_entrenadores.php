@@ -54,7 +54,7 @@ $tiposEntrenador = $tiposEntrenador ?? [];
                 <div class="header-content">
                     <h1><i class="fas fa-users"></i> Gestión de Entrenadores</h1>
                     <div class="header-actions">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarEntrenadorModal">
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#agregarEntrenadorModal">
                             <i class="fas fa-plus"></i> Nuevo Entrenador
                         </button>
                     </div>
@@ -242,7 +242,7 @@ $tiposEntrenador = $tiposEntrenador ?? [];
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Entrenador</button>
+                        <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Guardar Entrenador</button>
                     </div>
                 </form>
             </div>

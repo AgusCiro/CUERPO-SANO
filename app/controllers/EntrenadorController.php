@@ -21,6 +21,7 @@ switch ($accion) {
         // Obtener filtro de búsqueda
         $filtro = $_GET['filtro'] ?? '';
         $entrenadores = $entrenador->obtenerEntrenadores($filtro);
+        $tiposEntrenador = $entrenador->obtenerTiposEntrenador();
 
         // Incluir la vista de listado
         include_once __DIR__ . '/../templates/entrenador/listar_entrenadores.php';
@@ -89,6 +90,7 @@ switch ($accion) {
     case 'editar':
         $id = $_GET['id'] ?? $_POST['id'] ?? 0;
         $entrenadorData = $entrenador->obtenerEntrenadorPorId($id);
+        $tiposEntrenador = $entrenador->obtenerTiposEntrenador();
         
         if (!$entrenadorData) {
             header("Location: EntrenadorController.php?accion=listar&error=Entrenador+no+encontrado");
@@ -103,8 +105,12 @@ switch ($accion) {
                 'nombre' => trim($_POST['nombre'] ?? ''),
                 'apellido' => trim($_POST['apellido'] ?? ''),
                 'dni' => trim($_POST['dni'] ?? ''),
+                'direccion' => trim($_POST['direccion'] ?? ''),
                 'telefono' => trim($_POST['telefono'] ?? ''),
                 'email' => trim($_POST['email'] ?? ''),
+                'fecha_nacimiento' => $_POST['fecha_nacimiento'] ?? null,
+                'estado' => $_POST['estado'] ?? 1,
+                'tipos' => $_POST['tipos'] ?? []
             ];
 
             // Validaciones

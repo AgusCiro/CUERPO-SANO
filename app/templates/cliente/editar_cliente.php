@@ -23,6 +23,7 @@ $errores = $errores ?? [];
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: #212529; /* Set text to dark for readability */
         }
         .section-header {
             padding: 1rem;

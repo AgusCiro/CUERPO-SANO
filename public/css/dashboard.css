@@ -208,3 +208,7 @@ header {
     background-color: #fff; /* Ensure modal background is white */
     color: #212529;       /* Set text color to a dark color */
 }
+
+.modal-content select option {
+    color: #212529; /* Ensure dropdown options are readable */
+}

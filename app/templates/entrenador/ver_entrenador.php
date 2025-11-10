@@ -63,6 +63,16 @@ $usuario = $_SESSION['USUARIO'];
                                 <p><strong>DNI:</strong> <?php echo htmlspecialchars($entrenadorData['dni']); ?></p>
                                 <p><strong>Teléfono:</strong> <?php echo htmlspecialchars($entrenadorData['telefono']); ?></p>
                                 <p><strong>Email:</strong> <?php echo htmlspecialchars($entrenadorData['email']); ?></p>
+                                <p><strong>Especialidades:</strong> 
+                                    <?php 
+                                        if (!empty($entrenadorData['tipos'])) {
+                                            $tiposNombres = array_column($entrenadorData['tipos'], 'nombre');
+                                            echo htmlspecialchars(implode(', ', $tiposNombres));
+                                        } else {
+                                            echo 'No asignadas';
+                                        }
+                                    ?>
+                                </p>
                             </div>
                         </div>
                     </div>

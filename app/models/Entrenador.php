@@ -61,7 +61,7 @@ class Entrenador {
             $entrenador = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($entrenador) {
-                $entrenador['tipos'] = $this->obtenerTiposDeEntrenador($id);
+                $entrenador['tipos'] = $this->obtenerEspecialidadesDeEntrenador($id);
             }
             
             return $entrenador;
@@ -243,17 +243,21 @@ class Entrenador {
     }
 
     /**
-     * Obtener los IDs de los tipos de un entrenador
+     * Obtener las especialidades (tipos) de un entrenador
      */
-    public function obtenerTiposDeEntrenador($entrenadorId) {
+    public function obtenerEspecialidadesDeEntrenador($entrenadorId) {
         try {
-            $sql = "SELECT tipo_id FROM entrenador_tipo WHERE entrenador_id = :entrenador_id";
+            $sql = "SELECT te.id, te.nombre 
+                    FROM entrenador_tipo et
+                    JOIN tipo_entrenador te ON et.tipo_id = te.id
+                    WHERE et.entrenador_id = :entrenador_id
+                    ORDER BY te.nombre";
             $stmt = $this->conPDO->prepare($sql);
             $stmt->bindParam(':entrenador_id', $entrenadorId);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error obtenerTiposDeEntrenador: " . $e->getMessage());
+            error_log("Error obtenerEspecialidadesDeEntrenador: " . $e->getMessage());
             return [];
         }
     }
