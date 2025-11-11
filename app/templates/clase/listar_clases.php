@@ -48,7 +48,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                 <div class="header-content">
                     <h1><i class="fas fa-calendar-alt"></i> Gestión de Clases</h1>
                     <div class="header-actions">
-                        <a href="ClaseController.php?accion=agregar" class="btn btn-primary">
+                        <a href="ClaseController.php?accion=agregar" class="btn btn-info">
                             <i class="fas fa-plus"></i> Nueva Clase
                         </a>
                     </div>

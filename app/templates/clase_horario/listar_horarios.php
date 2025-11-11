@@ -50,7 +50,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                 <div class="header-content">
                     <h1><i class="fas fa-clock"></i> Horarios para: <?php echo htmlspecialchars($clase['nombre']); ?></h1>
                     <div class="header-actions">
-                        <a href="ClaseHorarioController.php?accion=agregar&clase_id=<?php echo $clase['id']; ?>" class="btn btn-primary">
+                        <a href="ClaseHorarioController.php?accion=agregar&clase_id=<?php echo $clase['id']; ?>" class="btn" style="background-color: #0dcaf0; color: white;">
                             <i class="fas fa-plus"></i> Nuevo Horario
                         </a>
                         <a href="ClaseController.php?accion=listar" class="btn btn-secondary">

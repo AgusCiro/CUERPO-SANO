@@ -263,3 +263,10 @@ header {
 body.dark-theme .form-label {
     color: #f8f9fa !important;
 }
+
+body.dark-theme .form-control,
+body.dark-theme .form-select {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-color: #495057;
+}

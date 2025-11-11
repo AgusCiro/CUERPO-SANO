@@ -18,7 +18,7 @@ $entrenadores = $entrenadores ?? [];
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../../public/css/dashboard.css" rel="stylesheet">
 </head>
-<body>
+<body class="dark-theme">
     <div class="dashboard-container">
         <!-- MENU LATERAL -->
         <aside class="sidebar">

@@ -52,7 +52,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                 <div class="header-content">
                     <div>
                         <h1><i class="fas fa-user-check"></i> Gestión de Inscripciones</h1>
-                        <p class="text-muted fs-5">
+                        <p class="text-muted fs-5" style="color: white !important;">
                             Clase: <strong><?php echo htmlspecialchars($clase['nombre']); ?></strong> <br>
                             Horario: <strong><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($horario['fecha_inicio']))); ?> - <?php echo htmlspecialchars(date('H:i', strtotime($horario['fecha_fin']))); ?></strong>
                         </p>
@@ -97,7 +97,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-plus"></i> Inscribir</button>
+                                        <button type="submit" class="btn w-100" style="background-color: #0dcaf0; color: white;"><i class="fas fa-plus"></i> Inscribir</button>
                                     </form>
                                 <?php else: ?>
                                     <div class="alert alert-warning">No hay cupos disponibles.</div>

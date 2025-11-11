@@ -78,13 +78,13 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_inicio" class="form-label">Fecha y Hora de Inicio *</label>
+                                        <label for="fecha_inicio" class="form-label" style="color: white;">Fecha y Hora de Inicio *</label>
                                         <input type="datetime-local" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_fin" class="form-label">Fecha y Hora de Fin *</label>
+                                        <label for="fecha_fin" class="form-label" style="color: white;">Fecha y Hora de Fin *</label>
                                         <input type="datetime-local" class="form-control" id="fecha_fin" name="fecha_fin" required>
                                     </div>
                                 </div>
@@ -93,19 +93,19 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="ubicacion" class="form-label">Ubicación</label>
+                                        <label for="ubicacion" class="form-label" style="color: white;">Ubicación</label>
                                         <input type="text" class="form-control" id="ubicacion" name="ubicacion">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="cupo" class="form-label">Cupo Total *</label>
+                                        <label for="cupo" class="form-label" style="color: white;">Cupo Total *</label>
                                         <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Horario</button>
+                            <button type="submit" class="btn" style="background-color: #0dcaf0; color: white;"><i class="fas fa-save"></i> Guardar Horario</button>
                             <a href="ClaseHorarioController.php?accion=listar&clase_id=<?php echo $clase['id']; ?>" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>
