@@ -67,7 +67,7 @@ $errores = $errores ?? [];
                             <input type="hidden" name="id" value="<?php echo $membresiaData['id']; ?>">
                             
                             <div class="mb-3">
-                                <label for="cliente_id" class="form-label">Cliente</label>
+                                <label for="cliente_id" class="form-label text-white" >Cliente</label>
                                 <select class="form-select" name="cliente_id" id="cliente_id" required>
                                     <?php foreach ($clientes as $cli): ?>
                                         <option value="<?php echo $cli['id']; ?>" <?php echo ($cli['id'] == $membresiaData['cliente_id']) ? 'selected' : ''; ?>><?php echo htmlspecialchars($cli['nombre'] . ' ' . $cli['apellido']); ?></option>
@@ -77,7 +77,7 @@ $errores = $errores ?? [];
                             </div>
 
                             <div class="mb-3">
-                                <label for="tipo_id" class="form-label">Tipo de Membresía</label>
+                                <label for="tipo_id" class="form-label text-white">Tipo de Membresía</label>
                                 <select class="form-select" name="tipo_id" id="tipo_id" required>
                                     <?php foreach ($tipos as $tipo): ?>
                                         <option value="<?php echo $tipo['id']; ?>" <?php echo ($tipo['id'] == $membresiaData['tipo_id']) ? 'selected' : ''; ?> data-precio="<?php echo $tipo['precio']; ?>" data-dias="<?php echo $tipo['duracion_dias']; ?>"><?php echo htmlspecialchars($tipo['nombre']); ?></option>
@@ -95,13 +95,13 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+                                        <label for="fecha_inicio" class="form-label text-white">Fecha de Inicio</label>
                                         <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php echo $membresiaData['fecha_inicio']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_fin" class="form-label">Fecha de Fin</label>
+                                        <label for="fecha_fin" class="form-label text-white">Fecha de Fin</label>
                                         <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo $membresiaData['fecha_fin']; ?>" readonly>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="precio_final" class="form-label">Precio a Pagar</label>
+                                        <label for="precio_final" class="form-label text-white">Precio a Pagar</label>
                                         <input type="text" class="form-control" id="precio_final" readonly>
                                     </div>
                                 </div>
@@ -123,20 +123,20 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="precio_pagado" class="form-label">Precio Pagado</label>
+                                        <label for="precio_pagado" class="form-label text-white">Precio Pagado</label>
                                         <input type="number" step="0.01" class="form-control" name="precio_pagado" id="precio_pagado" value="<?php echo $membresiaData['precio_pagado']; ?>" readonly required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="numero_comprobante" class="form-label">Número de Comprobante</label>
+                                        <label for="numero_comprobante" class="form-label text-white">Número de Comprobante</label>
                                         <input type="text" class="form-control" name="numero_comprobante" id="numero_comprobante" value="<?php echo $membresiaData['numero_comprobante']; ?>" readonly>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="estado" class="form-label">Estado</label>
+                                <label for="estado" class="form-label text-white">Estado</label>
                                 <select class="form-select" name="estado" id="estado">
                                     <option value="vigente" <?php echo ($membresiaData['estado'] == 'vigente') ? 'selected' : ''; ?>>Vigente</option>
                                     <option value="vencida" <?php echo ($membresiaData['estado'] == 'vencida') ? 'selected' : ''; ?>>Vencida</option>

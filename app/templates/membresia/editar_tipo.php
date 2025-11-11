@@ -67,27 +67,27 @@ $errores = $errores ?? [];
                             <input type="hidden" name="id" value="<?php echo $tipoData['id']; ?>">
                             
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
+                                <label for="nombre" class="form-label text-white">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre" value="<?php echo htmlspecialchars($tipoData['nombre']); ?>" required>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="duracion" class="form-label">Duración (días)</label>
+                                        <label for="duracion" class="form-label text-white">Duración (días)</label>
                                         <input type="number" class="form-control" name="duracion" id="duracion" value="<?php echo htmlspecialchars($tipoData['duracion_dias']); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="precio" class="form-label">Precio</label>
+                                        <label for="precio" class="form-label text-white">Precio</label>
                                         <input type="number" step="0.01" class="form-control" name="precio" id="precio" value="<?php echo htmlspecialchars($tipoData['precio']); ?>" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripción</label>
+                                <label for="descripcion" class="form-label text-white">Descripción</label>
                                 <textarea class="form-control" name="descripcion" id="descripcion" rows="3"><?php echo htmlspecialchars($tipoData['descripcion']); ?></textarea>
                             </div>
 

@@ -60,13 +60,13 @@ $errores = $errores ?? [];
                     </div>
                 <?php endif; ?>
 
-                <div class="card bg-white p-4">
-                    <div class="card-body text-dark">
+                <div class="card bg-dark p-4">
+                    <div class="card-body text-white">
                         <form method="POST" action="MembresiaController.php">
                             <input type="hidden" name="accion" value="agregar">
                             
                             <div class="mb-3">
-                                <label for="cliente_id" class="form-label">Cliente</label>
+                                <label for="cliente_id" class="form-label text-white">Cliente</label>
                                 <select class="form-select" name="cliente_id" id="cliente_id" required>
                                     <option value="">Seleccione un cliente</option>
                                     <?php foreach ($clientes as $cli): ?>
@@ -77,7 +77,7 @@ $errores = $errores ?? [];
                             </div>
 
                             <div class="mb-3">
-                                <label for="tipo_id" class="form-label">Tipo de Membresía</label>
+                                <label for="tipo_id" class="form-label text-white">Tipo de Membresía</label>
                                 <select class="form-select" name="tipo_id" id="tipo_id" required>
                                     <option value="">Seleccione un tipo</option>
                                     <?php foreach ($tipos as $tipo): ?>
@@ -89,13 +89,13 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="mb-3">
-                                        <label for="membresia_descripcion" class="form-label">Descripción</label>
+                                        <label for="membresia_descripcion" class="form-label text-white">Descripción</label>
                                         <textarea class="form-control" id="membresia_descripcion" rows="2" readonly></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label for="membresia_precio" class="form-label">Precio Base</label>
+                                        <label for="membresia_precio" class="form-label text-white">Precio Base</label>
                                         <input type="text" class="form-control" id="membresia_precio" readonly>
                                     </div>
                                 </div>
@@ -104,13 +104,13 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+                                        <label for="fecha_inicio" class="form-label text-white">Fecha de Inicio</label>
                                         <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="fecha_fin" class="form-label">Fecha de Fin</label>
+                                        <label for="fecha_fin" class="form-label text-white">Fecha de Fin</label>
                                         <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" readonly required>
                                     </div>
                                 </div>
@@ -123,20 +123,20 @@ $errores = $errores ?? [];
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="precio_pagado" class="form-label">Precio Pagado</label>
+                                        <label for="precio_pagado" class="form-label text-white">Precio Pagado</label>
                                         <input type="number" step="0.01" class="form-control" name="precio_pagado" id="precio_pagado" readonly required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                      <div class="mb-3">
-                                        <label for="numero_comprobante" class="form-label">Número de Comprobante</label>
+                                        <label for="numero_comprobante" class="form-label text-white">Número de Comprobante</label>
                                         <input type="text" class="form-control" name="numero_comprobante" id="numero_comprobante" readonly>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
-                                 <label for="estado" class="form-label">Estado</label>
+                                 <label for="estado" class="form-label text-white">Estado</label>
                                  <input type="text" class="form-control" name="estado" id="estado" value="vigente" readonly>
                             </div>
 
@@ -166,7 +166,7 @@ $errores = $errores ?? [];
                     <h4 class="text-end">Total a Pagar: <span id="modal_total_pagar"></span></h4>
                     <hr>
                     <div class="mb-3">
-                        <label for="metodo_pago" class="form-label">Método de Pago</label>
+                        <label for="metodo_pago" class="form-label text-white">Método de Pago</label>
                         <select class="form-select" id="metodo_pago">
                             <option value="debito">Tarjeta de Débito</option>
                             <option value="credito">Tarjeta de Crédito</option>
