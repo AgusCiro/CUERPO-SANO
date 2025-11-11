@@ -295,7 +295,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
     <!-- Modal para agregar cliente -->
     <div class="modal fade" id="agregarClienteModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content modal-dark">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-user-plus"></i> Nuevo Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

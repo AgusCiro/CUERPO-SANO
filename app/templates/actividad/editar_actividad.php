@@ -76,25 +76,25 @@ $actividad = $actividad ?? []; // Asegura que $actividad exista
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($actividad['id']); ?>">
                             
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre *</label>
+                                <label for="nombre" class="form-label text-white">Nombre *</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($actividad['nombre'] ?? ''); ?>">
                             </div>
 
                             <div class="mb-3">
-                                <label for="descripcion" class="form-label">Descripción</label>
+                                <label for="descripcion" class="form-label text-white">Descripción</label>
                                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3"><?php echo htmlspecialchars($actividad['descripcion'] ?? ''); ?></textarea>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="duracion_minutos" class="form-label">Duración (minutos) *</label>
+                                        <label for="duracion_minutos" class="form-label text-white">Duración (minutos) *</label>
                                         <input type="number" class="form-control" id="duracion_minutos" name="duracion_minutos" required value="<?php echo htmlspecialchars($actividad['duracion_minutos'] ?? ''); ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="intensidad" class="form-label">Intensidad</label>
+                                        <label for="intensidad" class="form-label text-white">Intensidad</label>
                                         <select class="form-select" id="intensidad" name="intensidad">
                                             <option value="Baja" <?php echo ($actividad['intensidad'] ?? '') === 'Baja' ? 'selected' : ''; ?>>Baja</option>
                                             <option value="Media" <?php echo ($actividad['intensidad'] ?? '') === 'Media' ? 'selected' : ''; ?>>Media</option>
@@ -104,7 +104,7 @@ $actividad = $actividad ?? []; // Asegura que $actividad exista
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                            <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Guardar Cambios</button>
                             <a href="ActividadController.php?accion=listar" class="btn btn-secondary">Cancelar</a>
                         </form>
                     </div>

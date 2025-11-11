@@ -156,7 +156,7 @@ $tiposEntrenador = $tiposEntrenador ?? [];
     <!-- Modal para agregar entrenador -->
     <div class="modal fade" id="agregarEntrenadorModal" tabindex="-1">
         <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+            <div class="modal-content modal-dark">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-user-plus"></i> Nuevo Entrenador</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -252,7 +252,7 @@ $tiposEntrenador = $tiposEntrenador ?? [];
     <!-- Modal de confirmación para eliminar -->
     <div class="modal fade" id="eliminarModal" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content modal-dark">
                 <div class="modal-header">
                     <h5 class="modal-title"><i class="fas fa-exclamation-triangle text-warning"></i> Confirmar Eliminación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

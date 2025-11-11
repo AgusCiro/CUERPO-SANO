@@ -142,7 +142,8 @@ $errores = $_GET['errores'] ?? [];
                                     ?>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar Cambios</button>
+                            <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> Guardar Cambios</button>
+                            <a href="../controllers/EntrenadorController.php?accion=listar" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
                         </form>
                     </div>
                 </div>

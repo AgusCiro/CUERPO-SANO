@@ -17,6 +17,14 @@ $errores = $_GET['errores'] ?? [];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../../public/css/dashboard.css" rel="stylesheet">
+    <style>
+        .card, .card-body {
+            background-color: #343a40; /* Fondo oscuro */
+        }
+        .form-label {
+            color: #ffffff; /* Letra blanca para que se vea sobre fondo oscuro */
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-container">

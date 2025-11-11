@@ -25,7 +25,11 @@ $errores = $errores ?? [];
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .form-container .form-label {
+            color: #212529 !important;
+        }
+        .form-container .form-control {
             color: #212529;
+            background-color: #fff; /* Ensure input background is white */
         }
     </style>
 </head>

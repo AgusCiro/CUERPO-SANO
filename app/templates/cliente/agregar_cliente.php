@@ -19,10 +19,13 @@ $errores = $errores ?? [];
     <link href="../../public/css/dashboard.css" rel="stylesheet">
     <style>
         .form-container {
-            background: #f8f9fa;
+            background: #343a40;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-container label, .form-container .form-text {
+            color: white;
         }
         .section-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
