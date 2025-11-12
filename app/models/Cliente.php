@@ -48,7 +48,7 @@ class Cliente {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error obtenerClientes: " . $e->getMessage());
+            
             return [];
         }
     }
@@ -68,7 +68,7 @@ class Cliente {
             
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error obtenerClientePorId: " . $e->getMessage());
+            
             return false;
         }
     }
@@ -80,7 +80,7 @@ class Cliente {
         try {
             $sql = "INSERT INTO clientes (codigo_barcode, nombre, apellido, dni, direccion, telefono, email, fecha_nacimiento, tipo_descuento, estado) 
                     VALUES (:codigo_barcode, :nombre, :apellido, :dni, :direccion, :telefono, :email, :fecha_nacimiento, :tipo_descuento, :estado)";
-            var_dump($datos);
+            
             $stmt = $this->conPDO->prepare($sql);
             
             $stmt->bindParam(':codigo_barcode', $datos['codigo_barcode']);

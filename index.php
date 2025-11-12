@@ -8,7 +8,7 @@ session_start();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CUERPO SANO - Gimnasio</title>
+    <title>LIFTUP - Gimnasio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
@@ -20,7 +20,7 @@ session_start();
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#">🏋️‍♂️ Cuerpo Sano</a>
+            <a class="navbar-brand fw-bold fs-3" href="#">🏋️‍♂️ LIFTUP</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +42,7 @@ session_start();
     <section id="inicio" class="hero d-flex align-items-center text-center text-white">
         <div class="container">
             <h1 class="display-3 fw-bold">Transformá tu cuerpo, transformá tu vida</h1>
-            <p class="lead mt-3">En <strong>Cuerpo Sano</strong> te ayudamos a alcanzar tus metas con entrenamientos personalizados y clases únicas.</p>
+            <p class="lead mt-3">En <strong>LIFTUP</strong> te ayudamos a alcanzar tus metas con entrenamientos personalizados y clases únicas.</p>
             <a href="app/templates/usuario/login.php" class="btn btn-lg btn-warning mt-4">Comenzar Ahora</a>
         </div>
     </section>
@@ -170,14 +170,14 @@ session_start();
             <div class="row g-4">
                 <!-- Información de Contacto -->
                 <div class="col-md-4">
-                    <h5 class="fw-bold mb-3">🏋️‍♂️ Cuerpo Sano</h5>
+                    <h5 class="fw-bold mb-3">🏋️‍♂️ LIFTUP</h5>
                     <p class="mb-2">📍 <strong>Dirección:</strong><br>
                     Av. Corrientes 1234, CABA<br>
                     Buenos Aires, Argentina</p>
                     <p class="mb-2">📞 <strong>Teléfono:</strong><br>
                     (011) 4567-8900</p>
                     <p class="mb-0">📧 <strong>Email:</strong><br>
-                    info@cuerposano.com.ar</p>
+                    info@liftup.com.ar</p>
                 </div>
                 
                 <!-- Horarios -->
@@ -216,7 +216,7 @@ session_start();
             <!-- Copyright -->
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="mb-0">&copy; <?php echo date('Y'); ?> Cuerpo Sano - Todos los derechos reservados | 
+                    <p class="mb-0">&copy; <?php echo date('Y'); ?> LIFTUP - Todos los derechos reservados | 
                     <a href="#" class="text-warning text-decoration-none">Política de Privacidad</a> | 
                     <a href="#" class="text-warning text-decoration-none">Términos y Condiciones</a></p>
                 </div>

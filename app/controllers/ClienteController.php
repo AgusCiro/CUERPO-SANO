@@ -1,4 +1,4 @@
-<?php
+<!--  --><?php
 include_once __DIR__ . '/../models/Cliente.php';
 include_once __DIR__ . '/../models/Membresia.php';
 
@@ -24,6 +24,7 @@ switch ($accion) {
         // Obtener filtro de búsqueda
         $filtro = $_GET['filtro'] ?? '';
         $clientes = $cliente->obtenerClientes($filtro);
+        $estadisticas = $cliente->obtenerEstadisticas();
 
         // Para cada cliente, obtener su última membresía
         foreach ($clientes as &$c) {
@@ -63,7 +64,7 @@ switch ($accion) {
                 'tipo_descuento' => $_POST['tipo_descuento'] ?? 'none',
                 'estado' => $_POST['estado'] ?? 'activo'
             ];
-            var_dump($datos);
+            
             // Validaciones
             $errores = [];
             
@@ -182,13 +183,6 @@ switch ($accion) {
         header('Content-Type: application/json');
         $usuarios = $cliente->obtenerUsuariosDisponibles();
         echo json_encode($usuarios);
-        exit;
-
-    case 'ajax_estadisticas':
-        // Endpoint AJAX para obtener estadísticas
-        header('Content-Type: application/json');
-        $estadisticas = $cliente->obtenerEstadisticas();
-        echo json_encode($estadisticas);
         exit;
 
     default:

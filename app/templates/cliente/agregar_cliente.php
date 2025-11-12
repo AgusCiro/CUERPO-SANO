@@ -44,7 +44,7 @@ $errores = $errores ?? [];
     <div class="dashboard-container">
         <!-- MENU LATERAL -->
         <aside class="sidebar">
-            <h2>CUERPO SANO</h2>
+            <h2>LIFTUP</h2>
              <ul>
                 <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="ClienteController.php?accion=listar" class="active">👥 Clientes</a></li>

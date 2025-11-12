@@ -25,7 +25,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
     <div class="dashboard-container">
         <!-- MENU LATERAL -->
         <aside class="sidebar">
-            <h2>CUERPO SANO</h2>
+            <h2>LIFTUP</h2>
             <ul>
                 <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="/CUERPO-SANO/app/controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>

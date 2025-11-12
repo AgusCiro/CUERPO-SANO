@@ -9,9 +9,6 @@ let nombreClienteEliminar = '';
 
 // Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function() {
-    // Cargar estadísticas al cargar la página
-    cargarEstadisticas();
-    
     // Cargar usuarios disponibles para el modal de agregar
     cargarUsuariosDisponibles();
     
@@ -48,24 +45,7 @@ function configurarEventos() {
     }
 }
 
-/**
- * Cargar estadísticas de clientes via AJAX
- */
-function cargarEstadisticas() {
-    fetch('ClienteController.php?accion=ajax_estadisticas')
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                document.getElementById('total-clientes').textContent = data.total_clientes || 0;
-                document.getElementById('clientes-activos').textContent = data.clientes_activos || 0;
-                document.getElementById('estudiantes').textContent = data.estudiantes || 0;
-                document.getElementById('mayores').textContent = data.mayores || 0;
-            }
-        })
-        .catch(error => {
-            console.error('Error al cargar estadísticas:', error);
-        });
-}
+
 
 /**
  * Cargar usuarios disponibles para el select
@@ -91,7 +71,7 @@ function cargarUsuariosDisponibles() {
             }
         })
         .catch(error => {
-            console.error('Error al cargar usuarios:', error);
+            
         });
 }
 

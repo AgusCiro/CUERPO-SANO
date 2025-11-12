@@ -15,7 +15,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Clientes - Cuerpo Sano</title>
+    <title>Gestión de Clientes - LIFTUP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../../public/css/dashboard.css" rel="stylesheet">
@@ -79,7 +79,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
     <div class="dashboard-container">
         <!-- MENU LATERAL -->
         <aside class="sidebar">
-            <h2>CUERPO SANO</h2>
+            <h2>LIFTUP</h2>
             <ul>
                 <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="#" class="active">👥 Clientes</a></li>
@@ -128,7 +128,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                         <div class="card stats-card">
                             <div class="card-body text-center">
                                 <i class="fas fa-users fa-2x mb-2"></i>
-                                <div class="stats-number" id="total-clientes">-</div>
+                                <div class="stats-number" id="total-clientes"><?php echo $estadisticas['total_clientes'] ?? 0; ?></div>
                                 <div>Total Clientes</div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                         <div class="card stats-card">
                             <div class="card-body text-center">
                                 <i class="fas fa-check-circle fa-2x mb-2"></i>
-                                <div class="stats-number" id="clientes-activos">-</div>
+                                <div class="stats-number" id="clientes-activos"><?php echo $estadisticas['clientes_activos'] ?? 0; ?></div>
                                 <div>Activos</div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                         <div class="card stats-card">
                             <div class="card-body text-center">
                                 <i class="fas fa-graduation-cap fa-2x mb-2"></i>
-                                <div class="stats-number" id="estudiantes">-</div>
+                                <div class="stats-number" id="estudiantes"><?php echo $estadisticas['estudiantes'] ?? 0; ?></div>
                                 <div>Estudiantes</div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@ $tipoMensaje = isset($_GET['success']) ? 'success' : (isset($_GET['error']) ? 'd
                         <div class="card stats-card">
                             <div class="card-body text-center">
                                 <i class="fas fa-user-clock fa-2x mb-2"></i>
-                                <div class="stats-number" id="mayores">-</div>
+                                <div class="stats-number" id="mayores"><?php echo $estadisticas['mayores'] ?? 0; ?></div>
                                 <div>Mayores</div>
                             </div>
                         </div>

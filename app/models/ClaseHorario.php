@@ -138,6 +138,45 @@ class ClaseHorario {
     }
 
     /**
+     * Obtener todos los horarios para un mes y año específicos, incluyendo detalles de la clase, actividad y entrenador.
+     */
+    public function obtenerHorariosPorMesAnio($mes, $anio) {
+        try {
+            // Asegurarse de que el mes tenga dos dígitos (ej. '01', '02', ..., '12')
+            $mesFormateado = str_pad($mes, 2, '0', STR_PAD_LEFT);
+
+            $sql = "SELECT 
+                        ch.id as horario_id,
+                        ch.clase_id,
+                        ch.fecha_inicio,
+                        ch.fecha_fin,
+                        ch.ubicacion,
+                        ch.cupo,
+                        ch.cupo_restante,
+                        c.nombre as nombre_clase,
+                        c.capacidad as capacidad_clase,
+                        a.nombre as nombre_actividad,
+                        e.nombre as nombre_entrenador,
+                        e.apellido as apellido_entrenador
+                    FROM clase_horarios ch
+                    JOIN clases c ON ch.clase_id = c.id
+                    JOIN actividades a ON c.actividad_id = a.id
+                    LEFT JOIN entrenadores e ON c.entrenador_id = e.id
+                    WHERE YEAR(ch.fecha_inicio) = :anio 
+                    AND MONTH(ch.fecha_inicio) = :mes
+                    ORDER BY ch.fecha_inicio";
+            $stmt = $this->conPDO->prepare($sql);
+            $stmt->bindParam(':mes', $mesFormateado, PDO::PARAM_STR);
+            $stmt->bindParam(':anio', $anio, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en obtenerHorariosPorMesAnio: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
      * Restablece el cupo de un horario y elimina todas las inscripciones asociadas.
      */
     public function restablecerHorario($horario_id) {

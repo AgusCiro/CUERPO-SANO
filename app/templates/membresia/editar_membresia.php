@@ -12,7 +12,7 @@ $errores = $errores ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Membresía - Cuerpo Sano</title>
+    <title>Editar Membresía - LIFTUP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../../public/css/dashboard.css" rel="stylesheet">
@@ -20,7 +20,7 @@ $errores = $errores ?? [];
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <h2>CUERPO SANO</h2>
+            <h2>LIFTUP</h2>
             <ul>
                 <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="/CUERPO-SANO/app/controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>

@@ -19,7 +19,7 @@ $usuario = $_SESSION['USUARIO'];
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Control - Cuerpo Sano</title>
+    <title>Panel de Control - LIFTUP</title>
     <link rel="stylesheet" href="../../public/css/dashboard.css">
     <script src="../../public/js/app/class/dashboard.js" defer></script>
 </head>
@@ -27,7 +27,7 @@ $usuario = $_SESSION['USUARIO'];
     <div class="dashboard-container">
         <!-- MENU LATERAL -->
         <aside class="sidebar">
-            <h2>CUERPO SANO</h2>
+            <h2>LIFTUP</h2>
             <ul>
                 <li><a href="/CUERPO-SANO/app/templates/dashboard.php">🏠 Inicio</a></li>
                 <li><a href="/CUERPO-SANO/app/controllers/ClienteController.php?accion=listar">👥 Clientes</a></li>
